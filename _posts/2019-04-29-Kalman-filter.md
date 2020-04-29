@@ -4,7 +4,7 @@ title:      卡尔曼滤波器初级教程
 subtitle:   观测器的数学模型以及卡尔曼滤波器介绍
 date:       2019-04-29
 author:     Zeyuan
-header-img: img/image737.jpg
+header-img: img/6db291ac9963003618ca6aa15063c4d6-1552299211.jpg
 catalog: true
 tags:
     - 状态观测器
