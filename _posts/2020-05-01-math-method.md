@@ -4,7 +4,7 @@ title:      常用数学工具
 subtitle:   矩阵运算，数学技巧等
 date:       2020-05-01
 author:     Zeyuan
-header-img: img/howtoovercom.jpg
+header-img: img/base.jpg
 catalog: true
 tags:
     - 数学工具
