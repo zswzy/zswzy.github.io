@@ -2,7 +2,7 @@
 layout:     post
 title:      飞航坐标系总结
 subtitle:   各种常用坐标系以及动力学方程解析
-date:       2019-04-27
+date:       2020-04-27
 author:     Zeyuan
 header-img: img/image737.jpg
 catalog: true
@@ -87,6 +87,3 @@ $(U_e,V_e,W_e)$是速度在reference axes，如稳定机体坐标系下的分量
 - refereces axes是气流坐标系时，$\theta_e = W_e = 0$。
 
 **之后所有的动力学方程都满足上述的总结。**
-
-
-
