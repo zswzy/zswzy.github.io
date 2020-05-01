@@ -13,6 +13,10 @@ tags:
 <link rel="stylesheet" type="text/css" href="auto-number-title.css" />
 
 # 常用数学工具
+目前已经总结的一些公式：
+1. [雅可比（Jacobi）矩阵](#no1)
+
+<a name="no1"/>
 ## 雅可比（Jacobi）矩阵
 在系统线性化，或者求函数的级数展开时经常会遇到多维的函数，这些函数的求导需要使用雅可比矩阵，具体的定义如下：
 
