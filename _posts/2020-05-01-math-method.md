@@ -52,7 +52,7 @@ $$
 
 - 函数$\textbf{f}$在$\textbf{x}_0$处的线性化为：
 $$
-\textbf{f}(\textbf{x_0}+d\textbf{x}) = \textbf{f}(\textbf{x_0}) + \textbf{J}_{\textbf{f},\textbf{x} = \textbf{x}_0}\times d\textbf{x} + o(\|d\textbf{x}\|)
+\textbf{f}(\textbf{x}_0+d\textbf{x}) = \textbf{f}(\textbf{x}_0) + \textbf{J}_{\textbf{f},\textbf{x} = \textbf{x}_0}\times d\textbf{x} + o(\|d\textbf{x}\|)
 $$
 其中
 $$ d\textbf{x} = \left[
