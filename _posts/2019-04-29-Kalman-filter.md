@@ -22,7 +22,9 @@ $\dot x =Ax+Bu $，$y = Cx+Du$
 
 相应的观测器：
 
-$\dot{\hat x} =A\hat x+Bu+K(y-\hat y)$，$\hat y = C\hat x+Du$
+$$
+\dot{\hat x} =A\hat x+Bu+K(y-\hat y)
+$$，$\hat y = C\hat x+Du$
 
 写成框图的形式：
 
