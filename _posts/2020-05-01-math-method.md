@@ -43,3 +43,24 @@ dx_n
 \right]
 $$
 需要满足相同的维度，即$\textbf{J}$ 的某一排需要和这一列$\textbf{x}$相乘，所以$\textbf{J}$的每一排都是对固定的f维度对每一维x求导。
+
+- 矩阵的分量：$\textbf{J}_{ij} = \frac{\partial{f_i}}{\partial{x_j}}$
+
+- 函数$\textbf{f}$在$\textbf{x}_0$处的线性化为：
+$$
+\textbf{f}(\textbf{x_0}+d\textbf{x}) = \textbf{f}(\textbf{x_0}) + \textbf{J}_{\textbf{f},\textbf{x} = \textbf{x}_0}\times d\textbf{x} + o(\|d\textbf{x}\|)
+$$
+其中
+$$ d\textbf{x} = \left[
+\begin{matrix}
+dx_1 \\
+\vdots \\
+dx_n
+\end{matrix}
+\right]
+$$
+- 雅可比矩阵的逆矩阵为反函数的雅可比矩阵。
+
+**与梯度的关系**：
+***雅可比矩阵是该函数梯度的转置！！:scream::scream::scream:***
+（主要是由于在梯度中小量的表示通常是行向量）
