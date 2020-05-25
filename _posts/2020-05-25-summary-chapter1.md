@@ -40,10 +40,11 @@ Some HPC or Large Scale PC-clusters exist in some Clouds
 
 
 
-![image-20200524153242427](/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200524153242427.png)
+![image-20200524153242427](https://tva1.sinaimg.cn/large/007S8ZIlgy1gf5fdxs7ljj30og06oabc.jpg)
 
 在自己处理器RAM里的数据速度 > 别的处理器的RAM > 其他node
 
 Fault tolerance
 
 Energy Consumption
+
