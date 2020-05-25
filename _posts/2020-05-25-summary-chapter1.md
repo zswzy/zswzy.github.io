@@ -4,7 +4,7 @@ title:      Summary-chapter1
 subtitle:   
 date:       2020-05-25
 author:     Zeyuan
-header-img: img/base.jpg
+header-img: img/ibmpower9supercomputer.jpg
 catalog: true
 tags:
     - ST7
@@ -21,7 +21,7 @@ Supercomputer结构：
 一般来说，一个supercomputer由一个个的cluster组成，cluster是一群PC的集合，或者说是node的集合，node里面包含了很多的处理器，每个处理器由很多的core组成。
 
 - cores, with vetor units
-- Multi-core processor 
+- Multi-core processor
 - Multi-core PC/node
 - Multi-core PC cluster
 - Super- Computer
