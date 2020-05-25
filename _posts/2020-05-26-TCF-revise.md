@@ -4,7 +4,7 @@ title:      TCF复习（持续更新中）
 subtitle:   TCF常用复习资源
 date:       2020-05-26
 author:     Zeyuan
-header-img: img/inscription-de-langue-française-137829210.jpg
+header-img: img/parler_fr_bandeau.png
 catalog: true
 tags:
     - 法语
