@@ -4,7 +4,7 @@ title:      TCF复习（持续更新中）
 subtitle:   TCF常用复习资源
 date:       2020-05-26
 author:     Zeyuan
-header-img: img/mots_intraduisibles_bandeau.png
+header-img: img/francais-traduction-“français-“-griffonnages-tirés-par-la-main-et-inscription-de-langue-française-137829210.jpg
 catalog: true
 tags:
     - 法语
