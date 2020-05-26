@@ -9,6 +9,8 @@ catalog: true
 tags:
     - ST7
 ---
+- 这里是一个目录
+{:toc}
 
 # Summary Chapter1
 
@@ -47,4 +49,3 @@ Some HPC or Large Scale PC-clusters exist in some Clouds
 Fault tolerance
 
 Energy Consumption
-
