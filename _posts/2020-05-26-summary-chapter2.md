@@ -9,8 +9,7 @@ catalog: true
 tags:
     - ST7
 ---
-- 这里是一
-个目录
+- 这里是一个目录
 {:toc}
 # Summary Chapter2
 
@@ -411,7 +410,7 @@ P个node，每个node有C个core。
 假设矩阵的大小为$\sqrt{N}*\sqrt{N}$，计算C = AxB.
 
 - 非并行：矩阵计算，每计算一个对应元素，就要用A的一行和B的一列，也就是要算根号N次，并且求和根号N次(实际上是根号N-1次)，也就是2倍根号N次。C中一共有N个元素要计算。
-  
+
   - <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf62c5o2nej30b0048t8y.jpg" alt="image-20200526131143091" style="zoom: 33%;" /> *tflop* *tient compte du multithreading sur C coeurs*
 - 并行计算：每一个node只需要计算C中的某一列，这一列一共有N/P个元素。而每一轮，只需要计算这一列中的1/P个元素，也就是N/P^2个元素。node之间的通信，数据量为轮换A的一行，也就是N/P个元素。t~s~起始时间可以忽略略不计
   - <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf62jypj4uj30fw0bs757.jpg" alt="image-20200526131916950" style="zoom:33%;" />modele: t~comm~ = t~s~ + qt~w~
