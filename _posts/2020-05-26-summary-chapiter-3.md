@@ -9,6 +9,7 @@ catalog: true
 tags:
     - ST7
     - partitionning
+mermaid: true
 ---
 
 - 这里是一个目录
