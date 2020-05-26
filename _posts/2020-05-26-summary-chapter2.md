@@ -674,7 +674,7 @@ Speed-up:<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf64ln1r52j30ts0ca0u
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf650qim88j30r80detak.jpg" alt="image-20200526144435313" style="zoom:50%;" />
 
 #### Comparison 1D Ring / 2D Torus solutions:
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf689tzkzlj30xq0h20ve.jpg" alt="image-20200526144501648" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf68a619nuj30xq0h2gnv.jpg" alt="image-20200526144501648" style="zoom:50%;" />
 
 ### Hyper-quicksort on a kD hypercube
 
