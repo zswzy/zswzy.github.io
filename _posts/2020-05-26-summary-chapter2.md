@@ -50,7 +50,7 @@ tags:
 - Non-blocking send, buffered send
 - Blocking recv
 
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200524164734631.png" alt="image-20200524164734631" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf686juaixj30u803yt99.jpg" alt="image-20200524164734631" style="zoom:50%;" />
 
 **Bsend**: 先把数据拷贝到buffer再发送，拷贝完毕后return。原始数据可以被重写。
 
@@ -73,13 +73,13 @@ Recv(Tab,...,Me-1,...);
 ...
 ```
 
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200524165117725.png" alt="image-20200524165117725" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf686l6kjij30qk07ygmq.jpg" alt="image-20200524165117725" style="zoom:50%;" />
 
 
 
 #### Synchronous & blocking comm.: Ssend/Recv
 
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200524165152561.png" alt="image-20200524165152561" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf686xnfvvj30gw0bwq4g.jpg" alt="image-20200524165152561" style="zoom:50%;" />
 
 Communications are *appointments (***Rendez- Vous)** between processes。
 
@@ -110,7 +110,7 @@ else:
 	permut(buffer,Tab);
 ```
 
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200524170359072.png" alt="image-20200524170359072" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf68754ngej30n408sgmt.jpg" alt="image-20200524170359072" style="zoom:50%;" />
 
 - 注意如果不分奇偶的话会有deadlock
 
@@ -224,7 +224,7 @@ def ComputationAndCirculation:
 
 ![image-20200525164040888](https://tva1.sinaimg.cn/large/007S8ZIlgy1gf52r9y7j6j311w0ngte0.jpg)
 
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200525164527444.png" alt="image-20200525164527444" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf687oetmxj311c0nmdl2.jpg" alt="image-20200525164527444" style="zoom:50%;" />
 
 ### Exemples de parallélisation
 
@@ -238,7 +238,7 @@ Parallélisation de la relaxation de Jacobi
 
 Parallélisation du bubble-sort
 
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200525164900869.png" alt="image-20200525164900869" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf687wx46aj31140lewir.jpg" alt="image-20200525164900869" style="zoom:50%;" />
 
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf5301ocq6j311o0nudkt.jpg" alt="image-20200525164910690" style="zoom:50%;" />
 
@@ -316,7 +316,7 @@ mpirun –np #P –machinefile machines.txt
 
 #### Sol 4 : un processus MPI par node et C threads/process
 
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200525233309800.png" alt="image-20200525233309800" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf688acrtzj30oa07gjsx.jpg" alt="image-20200525233309800" style="zoom:50%;" />
 
 ```python
 mpirun –np #P –machinefile machines.txt
@@ -340,7 +340,7 @@ mpirun –np #P –machinefile machines.txt
 
 #### Options de binding de MPI
 
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200525233550500.png" alt="image-20200525233550500" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf688eta6vj30sy07gjs3.jpg" alt="image-20200525233550500" style="zoom:50%;" />
 
 #### Meilleur déploiement ?
 - L’occupation des ressources de calcul disponibles
@@ -371,7 +371,7 @@ mpirun –np #P –machinefile machines.txt
 #### Modélisation des communications
 
 - 在同一个node里面，$t_{comm} = 0$,迅速
-- 在不同node间，<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200526124425376.png" alt="image-20200526124425376" style="zoom:50%;" /> 一个起始时间，加上与信息量成正比的时间，比较慢
+- 在不同node间，<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf688m57ovj30qc048gm1.jpg" alt="image-20200526124425376" style="zoom:50%;" /> 一个起始时间，加上与信息量成正比的时间，比较慢
 
 #### Volume des comms. du déploiement
 
@@ -411,10 +411,11 @@ P个node，每个node有C个core。
 假设矩阵的大小为$\sqrt{N}*\sqrt{N}$，计算C = AxB.
 
 - 非并行：矩阵计算，每计算一个对应元素，就要用A的一行和B的一列，也就是要算根号N次，并且求和根号N次(实际上是根号N-1次)，也就是2倍根号N次。C中一共有N个元素要计算。
+  
   - <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf62c5o2nej30b0048t8y.jpg" alt="image-20200526131143091" style="zoom: 33%;" /> *tflop* *tient compte du multithreading sur C coeurs*
 - 并行计算：每一个node只需要计算C中的某一列，这一列一共有N/P个元素。而每一轮，只需要计算这一列中的1/P个元素，也就是N/P^2个元素。node之间的通信，数据量为轮换A的一行，也就是N/P个元素。t~s~起始时间可以忽略略不计
   - <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf62jypj4uj30fw0bs757.jpg" alt="image-20200526131916950" style="zoom:33%;" />modele: t~comm~ = t~s~ + qt~w~
-  - 一共要算P次：<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200526132017743.png" alt="image-20200526132017743" style="zoom:33%;" />
+  - 一共要算P次：<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf688tj3q0j30co0583yv.jpg" alt="image-20200526132017743" style="zoom:33%;" />
 - Speed-up:<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf62lejudyj30d805sq38.jpg" alt="image-20200526132040589" style="zoom:33%;" />
 
 - 计算数据和通信之间的复杂度：计算复杂度>通信，也就是说在N较大的时候，计算复杂度为主导，而这个复杂度是比单核计算要小一些的。
@@ -673,7 +674,7 @@ Speed-up:<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf64ln1r52j30ts0ca0u
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf650qim88j30r80detak.jpg" alt="image-20200526144435313" style="zoom:50%;" />
 
 #### Comparison 1D Ring / 2D Torus solutions:
-<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20200526144501648.png" alt="image-20200526144501648" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gf689tzkzlj30xq0h20ve.jpg" alt="image-20200526144501648" style="zoom:50%;" />
 
 ### Hyper-quicksort on a kD hypercube
 
