@@ -4,7 +4,7 @@ title:      第一章 飞行器质心运动方程
 subtitle:   
 date:       2020-07-05
 author:     Zeyuan
-header-img: img/ibmpower9supercomputer.jpg
+header-img: img/418th_Flight_Test_Squadron_-_MC-130E.jpg
 catalog: true
 tags:
     - 航空飞行器飞行动力学
