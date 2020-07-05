@@ -8,6 +8,7 @@ header-img: img/418th_Flight_Test_Squadron_-_MC-130E.jpg
 catalog: true
 tags:
     - 航空飞行器飞行动力学
+    - Flight dynamics
 ---
 - 这里是一个目录
 {:toc}
