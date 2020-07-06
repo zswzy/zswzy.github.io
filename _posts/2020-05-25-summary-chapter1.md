@@ -1,5 +1,5 @@
 ---
-layout:     post
+layout:     #post
 title:      Summary-chapter1
 subtitle:   
 date:       2020-05-25
