@@ -91,7 +91,7 @@ $C_D = C_{D0} + C_{Di} = C_{D0}+AC_L^2$
 
 诱导阻力。机翼翼梢产生翼梢绕流，后缘尾涡。产生诱导下洗流作用于机翼及其后区域。耗散能量。
 
-- 升致阻力因子A取决于外形，M，Re。亚声速时，随展弦比增大而减小（对M基本不变）$A = \frac{1}{\pi \lambda}$。超声速时，随M增大，波阻和压差阻力增大。$A = \frac{1}{C_{L\alpha}}\approx\frac{\sqrt{M^2-1}}{4}$<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gggqnxgml0j30iq08w74u.jpg" alt="image-20200705220927103" style="zoom:50%;" />
+- 升致阻力因子A取决于外形，M，Re。亚声速时，随展弦比增大而减小（对M基本不变）$A = \frac{1}{\pi \lambda}$ （这是对于椭圆形机翼，如果不是椭圆形需要在展弦比前乘自然常数e）。超声速时，随M增大，波阻和压差阻力增大。$A = \frac{1}{C_{L\alpha}}\approx\frac{\sqrt{M^2-1}}{4}$<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gggqnxgml0j30iq08w74u.jpg" alt="image-20200705220927103" style="zoom:50%;" />
 
 #### 极曲线
 
@@ -119,7 +119,7 @@ $K = C_L/C_D$
 
 #### 最大升阻比，有利迎角，有利升力系数
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gggr3vsa15j30h00i6taf.jpg" alt="image-20200705222445835" style="zoom:50%;" /> $K_{max} = (C_L/C_D)_{max} = \frac{1}{2\sqrt{AC_{D0}}}$, CL取$\sqrt{\frac{C_{D0}}{A}}$, 对应$C_{Lopt}=\sqrt{\frac{C_{D0}}{A}},\alpha _{opt}=\sqrt{\frac{C_{D0}}{A}}/C_{L\alpha}+\alpha_0$, $C_{Di} = C_{D0}$
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gggr3vsa15j30h00i6taf.jpg" alt="image-20200705222445835" style="zoom:50%;" /> $K_{max} = (C_L/C_D)_{max} = \frac{1}{2\sqrt{AC_{D0}}}$, CL取$\sqrt{\frac{C_{D0}}{A}}$, 对应$C_{Lopt}=\sqrt{\frac{C_{D0}}{A}},\alpha _{opt}=\sqrt{\frac{C_{D0}}{A}}/C_{L\alpha}+\alpha_0$, $C_{Di} = C_{D0},C_D = C_{Di}+C_{D0} = 2C_{D0}$
 
 - 最大升阻比状态下,零升阻力系数等于升致阻力系数
 - 升阻比大,巡航经济性**(航时最长)**和机动性好。
