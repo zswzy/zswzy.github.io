@@ -4,7 +4,7 @@ title:      第二章 飞机的飞行性能
 subtitle:   
 date:       2020-07-06
 author:     Zeyuan
-header-img: img/767_sunset_takeoff.jpg
+header-img: img/747_takeoff.jpg
 catalog: true
 tags:
     - 航空飞行器飞行动力学
