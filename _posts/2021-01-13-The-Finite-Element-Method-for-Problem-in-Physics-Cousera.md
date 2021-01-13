@@ -30,3 +30,10 @@ tags:
 ## Problem case
 
 ![image-20210113133153713](https://tva1.sinaimg.cn/large/008eGmZEly1gmm0a2khkhj30yl082afa.jpg)
+
+一根木棍，长度L，左端固连，右端自由。
+
+- $u_g$: x = L处的指定位移
+- t: x = L处的指定拉力
+- f: 力分布函数
+
