@@ -13,15 +13,15 @@ tags:
 - 这里是一个目录
 {:toc}
 
-# The Finite Element Method for Problem in Physics - Cousera
+# The Finite Element Method for Problem in Physics - Coursera
 
 这是什么？
-这是来自Cousera的有限元分析课程：The Finite Element Method for Problems in Physics， University of Michigan
+这是来自Coursera的有限元分析课程：The Finite Element Method for Problems in Physics， University of Michigan
 教师：Krishna Garikipati, Ph.D.
 
 # Unit 1: Linear, elliptic PDE in 1D Elasticity, heat conduction and mass diffusion
 
-## 1.1-1.2 Intro linear elliptic PDE
+## Intro linear elliptic PDE
 
 ### e.g. Typical problem - 1D
 
@@ -50,11 +50,13 @@ Given $u(0) = u_0, u_g \ or \ t$, f(x)
 
 - u(0), u(L).两端已知。Dirichlet boundary condition
 
-- $\sigma(L) = t $Neumann boundary condition $\Rightarrow (Eu_{ix})_{x = L} = t$, from constitutive relation . 
+- $\sigma(L) = t $Neumann boundary condition $\Rightarrow (Eu_{,x})_{x = L} = t$, from constitutive relation . 
+
+> $u_{,x} == \frac{du}{dx}$
 
 **For elasticity**: Dirichet boundary condition is called the **displacement boundary condition** and Neumann boundary condition is called the **traction boundary condition**. 
 
-## 1.3 Boundary condition（空间） $\neq$ Initial condition(时间)
+## Boundary condition（空间） $\neq$ Initial condition(时间)
 
 <img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmm25yo9hqj30nk05ugob.jpg" alt="image-20210113143710161" style="zoom:50%;" />
 
@@ -74,8 +76,8 @@ We do not consider both Neumann b.c.s at x = 0 and x = L.
 
 Consider **Neumann** b.c.s at both ends:
 $$
-\sigma(0) = Eu_{ix}|_{x = 0} = t_0\\
-\sigma(L) = Eu_{ix}|_{x = L} = t_L
+\sigma(0) = Eu_{，x}|_{x = 0} = t_0\\
+\sigma(L) = Eu_{，x}|_{x = L} = t_L
 $$
 Consider u(x) satisfies Neumann b.c.x & DE: $\frac{d\sigma}{dx}+f = 0$ :
 $$
@@ -101,3 +103,72 @@ e.g.
 
 垂直悬挂的木棒，或者处于加速中的木棒<img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmm2ry7nfrj310o09qaen.jpg" alt="image-20210113145817396" style="zoom:50%;" />
 
+## Strong form of the partial differential equation
+
+### Strong condition
+
+Previous pb: find u(x), given u0, ug(or t), f(x), and the constitutive relation$\sigma = Eu_{,x}$, such that
+
+### 
+
+$$
+\frac{d\sigma}{dx}+f = 0, in(0,L)
+$$
+
+
+
+with Dirichlet b.c.s or Dirichlet+Neumann.
+
+If substuting with constitutive relation: 
+
+### 
+
+$$
+\frac{d}{dx} (E\frac{du}{dx})+f = 0, in(0,L)
+$$
+
+Problem of second derivative. Here is 2 conditions we require:
+
+- We require "strong condition" of "smoothness" on u(x), because the Strong Foem has two spatial derivatives.
+
+- We require the pde to hold pointwice in (0,L)
+
+### An analytic solution
+
+**If E is a constant:**
+$$
+\frac{d\sigma}{dx}  = -f  \Rightarrow \int_0^y\frac{d\sigma}{dx} dx= -\int_0^y f dx,\ y\isin[0,L]\\
+\Rightarrow \sigma(y) - \sigma(0) = -\int_0^y fdx \\
+\Rightarrow Eu_{,x}|_y - Eu_{,x}(0) = -\int_0^y fdx \\
+\Rightarrow E\frac{du}{dy} = -\int_0^y fdx + E\frac{du}{dx}|_0 \\
+\Rightarrow \int _0^zE\frac{du}{dy}dy = -\int_0^z(\int_0^y fdx) + \int _0^zE\frac{du}{dx}|_0dy \\
+\Rightarrow Eu(z) - Eu(0) = -\int_0^z(\int_0^y fdx)+E\frac{du}{dx}|_0z\\
+\Rightarrow u(z) = \frac{1}{E}(-\int_0^z(\int_0^y fdx)+E\frac{du}{dx}|_0z)+u(0)
+$$
+
+$E\frac{du}{dx}|_0$ is determined by applying b.c at z = L.
+
+> 已知u(L)的值就可以反求出$E\frac{du}{dx}|_0$ 
+
+If b.c. at x = L is a Neumann b.c, we first calculate $u_{,z}$  and then apply b.c $Eu_{,z}(L)$
+
+> Neumann 条件下无法直接知道u(L)，可以先把u(z)表达式求微分，然后用Neumann条件反求出$E\frac{du}{dx}|_0$ 
+
+### Weak form of the partial differential equation
+
+$$
+Find\ u(x)\isin \mathcal{S} = \{u|u(0) = u_0\}
+$$
+
+The condition in S is the Dirichlet b.c. at x= 0, only. 
+
+**Problem formulation(Weak form):** 
+
+Given u0, t, f(x), and the constitutive relation $\sigma = Eu_{i,x}$ ,such that $\forall w\isin \mathcal{V} = \{w|w(0) = 0\} $, 
+$$
+\int_0^L w_{i,x}\sigma dx = \int_0^Lwfdx + w(L)t
+$$
+Let A(x) is the section area in x, we have:
+$$
+\int_0^L w_{i,x}\sigma Adx = \int_0^LwfAdx + w(L)tA
+$$
