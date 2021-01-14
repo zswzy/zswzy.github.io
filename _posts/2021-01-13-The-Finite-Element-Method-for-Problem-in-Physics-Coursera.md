@@ -107,22 +107,16 @@ e.g.
 
 ### Strong condition
 
-Previous pb: find u(x), given u0, ug(or t), f(x), and the constitutive relation$\sigma = Eu_{,x}$, such that
+**Strong form formulation:**
 
-### 
-
+Previous pb: find u(x), given $u_0$, $u_g$ (or t), f(x), and the constitutive relation$\sigma = Eu_{,x}$, such that
 $$
 \frac{d\sigma}{dx}+f = 0, in(0,L)
 $$
 
-
-
 with Dirichlet b.c.s or Dirichlet+Neumann.
 
 If substuting with constitutive relation: 
-
-### 
-
 $$
 \frac{d}{dx} (E\frac{du}{dx})+f = 0, in(0,L)
 $$
@@ -154,7 +148,7 @@ If b.c. at x = L is a Neumann b.c, we first calculate $u_{,z}$  and then apply b
 
 > Neumann 条件下无法直接知道u(L)，可以先把u(z)表达式求微分，然后用Neumann条件反求出$E\frac{du}{dx}|_0$ 
 
-### Weak form of the partial differential equation
+## Weak form of the partial differential equation
 
 $$
 Find\ u(x)\isin \mathcal{S} = \{u|u(0) = u_0\}
@@ -164,7 +158,9 @@ The condition in S is the Dirichlet b.c. at x= 0, only.
 
 **Problem formulation(Weak form):** 
 
-Given u0, t, f(x), and the constitutive relation $\sigma = Eu_{i,x}$ ,such that $\forall w\isin \mathcal{V} = \{w|w(0) = 0\} $, 
+Given $u_0$, $\sigma(L) = t$, f(x), and the constitutive relation $\sigma = Eu_{,x}$ 
+
+Find $u(x)\isin \mathcal{S} = \{u|u(0) = u_0\}$ such that $\forall w\isin \mathcal{V} = \{w|w(0) = 0\} $, (homogenous Dirichlet b.c on w)
 $$
 \int_0^L w_{i,x}\sigma dx = \int_0^Lwfdx + w(L)t
 $$
@@ -172,3 +168,71 @@ Let A(x) is the section area in x, we have:
 $$
 \int_0^L w_{i,x}\sigma Adx = \int_0^LwfAdx + w(L)tA
 $$
+
+## **The strong form and weak form are equivalent** 
+
+### Strong form -> Weak form
+
+Consider the strong form:
+$$
+\frac{d\sigma}{dx}+f = 0, in(0,L)
+$$
+
+Dirichlet at x=  0 +Neumann at x=L, consititutive condition: $u(0) = u_0, \sigma(L) = t, \sigma = Eu_{,x} $
+
+Introduce $ w\isin \mathcal{V} = \{w|w(0) = 0\} $, w: waiting funciton.
+
+Multiply w, A (sectional area) into strong form, and integrate
+$$
+\int _0^LwA\frac{d\sigma}{dx}dx+\int _0^LwAfdx = 0, in(0,L)
+$$
+
+Integrate by part:
+$$
+\Rightarrow  wA\sigma |_0^L - \int _0^Lw_{,x}A\sigma dx+\int _0^LwAfdx = 0 \\
+\Rightarrow \int _0^Lw_{,x}A\sigma dx = \int _0^LwAfdx + wA\sigma |_0^L \\
+\Rightarrow \int _0^Lw_{,x}A\sigma dx = \int _0^LwAfdx + w(L)A\sigma(L) -w(0)A\sigma(0) = \int _0^LwAfdx + w(L)At
+$$
+
+
+
+So we have the weak form. 
+
+### Weak form -> Strong form
+
+Starting from the weak form formulation:
+
+Given $u_0$, $\sigma(L) = t$, f(x), A, and the constitutive relation $\sigma = Eu_{,x}$ 
+
+Find $u(x)\isin \mathcal{S} = \{u|u(0) = u_0\}$ such that $\forall w\isin \mathcal{V} = \{w|w(0) = 0\} $, (homogenous Dirichlet b.c on w)
+$$
+\int_0^L w_{,x}\sigma Adx = \int_0^LwfAdx + w(L)tA
+$$
+Integrate by part:
+$$
+w\sigma A|_0^L -  \int_0^L w\sigma_{,x} Adx = \int_0^LwfAdx + w(L)tA\\
+\Rightarrow w(L)t A -w(0)\sigma(0)A-  \int_0^L w\sigma_{,x} Adx = \int_0^LwfAdx + w(L)tA \\
+\Rightarrow  \int_0^L w\sigma_{,x} Adx + \int_0^LwfAdx = 0\\
+\Rightarrow  \int_0^L w(\sigma_{,x}+f) Adx  = 0
+$$
+This holds for all $w\isin \mathcal{V} = \{w|w(0) = 0\}$. We choose $w(x) = \phi(x)(\sigma_{,x}+f)$, where
+$$
+\phi(x) >0 \ for \ x\isin(0,L)\\
+\phi(x) =0 \ for \ x\isin\{0,L\}\\
+$$
+So we have:
+$$
+\Rightarrow  \int_0^L \phi(x) (\sigma_{,x}+f)^2 Adx  = 0, \\
+\phi(x) (\sigma_{,x}+f)^2 A \geq 0, \ A>0\\
+\Rightarrow \sigma_{,x}+f = 0 \ for \ x\isin(0,L)
+$$
+Finally:
+$$
+\frac{d\sigma}{dx}+f = 0 \ for \ x\isin(0,L)
+$$
+This is the strong form. Also contain the Dirichlet and Neuman conditions.
+
+e.o.d
+
+
+
