@@ -135,9 +135,9 @@ $$
 \Rightarrow \sigma(y) - \sigma(0) = -\int_0^y fdx \\
 \Rightarrow Eu_{,x}|_y - Eu_{,x}(0) = -\int_0^y fdx \\
 \Rightarrow E\frac{du}{dy} = -\int_0^y fdx + E\frac{du}{dx}|_0 \\
-\Rightarrow \int _0^zE\frac{du}{dy}dy = -\int_0^z(\int_0^y fdx) + \int _0^zE\frac{du}{dx}|_0dy \\
-\Rightarrow Eu(z) - Eu(0) = -\int_0^z(\int_0^y fdx)+E\frac{du}{dx}|_0z\\
-\Rightarrow u(z) = \frac{1}{E}(-\int_0^z(\int_0^y fdx)+E\frac{du}{dx}|_0z)+u(0)
+\Rightarrow \int _0^zE\frac{du}{dy}dy = -\int_0^z(\int_0^y fdx)d y + \int _0^zE\frac{du}{dx}|_0dy \\
+\Rightarrow Eu(z) - Eu(0) = -\int_0^z(\int_0^y fdx)dy+E\frac{du}{dx}|_0z\\
+\Rightarrow u(z) = \frac{1}{E}[-\int_0^z(\int_0^y fdx)dy+E\frac{du}{dx}|_0z]+u(0)
 $$
 
 $E\frac{du}{dx}|_0$ is determined by applying b.c at z = L.
@@ -169,7 +169,7 @@ $$
 \int_0^L w_{i,x}\sigma Adx = \int_0^LwfAdx + w(L)tA
 $$
 
-## **The strong form and weak form are equivalent** 
+## The strong form and weak form are equivalent 
 
 ### Strong form -> Weak form
 
@@ -180,7 +180,7 @@ $$
 
 Dirichlet at x=  0 +Neumann at x=L, consititutive condition: $u(0) = u_0, \sigma(L) = t, \sigma = Eu_{,x} $
 
-Introduce $ w\isin \mathcal{V} = \{w|w(0) = 0\} $, w: waiting funciton.
+Introduce $ w\isin \mathcal{V} = \{w|w(0) = 0\} $, w: weighting funciton.
 
 Multiply w, A (sectional area) into strong form, and integrate
 $$
@@ -234,5 +234,7 @@ This is the strong form. Also contain the Dirichlet and Neuman conditions.
 
 e.o.d
 
+## Intro to C++ (pointers, iterators)
 
+<img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20210116234925800.png" alt="image-20210116234925800" style="zoom:50%;" />
 
