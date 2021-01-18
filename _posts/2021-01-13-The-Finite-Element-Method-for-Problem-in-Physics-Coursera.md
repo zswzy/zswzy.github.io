@@ -237,3 +237,46 @@ e.o.d
 ## Intro to C++ (pointers, iterators)
 
 <img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20210116234925800.png" alt="image-20210116234925800" style="zoom:50%;" />
+
+# Unit 2: Approximation. The finite-dimensional weak form
+
+## 2.01. The Galerkin, or finite-dimensional weak form
+
+The strong and weak form:
+
+Given $u_0$,t, f(x), and the constitutive relation![image-20210118225516142](https://tva1.sinaimg.cn/large/008eGmZEly1gms8nsjlx9j30vq08zn37.jpg)
+
+
+
+The finite element method is based on the approximate version of the Weak form .
+
+$u \isin \mathcal S, w \isin \mathcal V$,$ \mathcal S$ and $\mathcal V$ are infinite-dimensional function spaces.
+
+> 比如，S和V可以是任意n阶多项式函数空间
+
+Construct approximation in finite-dimensional function spaces.
+
+> 比如，S和V仅为0和1阶多项式函数空间
+
+### Finite-dimensional Weak form/ Galerkin weak form
+
+The idea is to restrict the solution space of weighting function space.
+
+**Finite-dimensional Weak form/ Galerkin weak form:**
+$$
+Find \\
+u^h(x) \isin \mathcal S^h \subset \mathcal S \\
+\mathcal S^h = \{u^h \isin H^1(0,L)|u^h(0) = u_0\}\\
+Such \ that\\ 
+\forall w^h \isin \mathcal V^h \subset  \mathcal V\\
+\mathcal V^h = \{w^h \isin  H^1(0,L)|w^h(0) = 0 \}
+$$
+
+> H为希尔伯特函数空间
+
+$$
+\int_0^Lw_{,x}^h \sigma^hAdx = \int_0^Lw^hfAdx + w^h(L)tA
+$$
+
+
+
