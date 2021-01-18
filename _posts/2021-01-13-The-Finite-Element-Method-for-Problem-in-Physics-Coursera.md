@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      有限元分析基础课程-Cousera
+title:      有限元分析基础课程-Coursera
 subtitle:   
 date:       2021-01-13
 author:     Zeyuan
@@ -50,11 +50,11 @@ Given $u(0) = u_0, u_g \ or \ t$, f(x)
 
 - u(0), u(L).两端已知。Dirichlet boundary condition
 
-- $\sigma(L) = t $Neumann boundary condition $\Rightarrow (Eu_{,x})_{x = L} = t$, from constitutive relation . 
+- $\sigma(L) = t $Neumann boundary condition $\Rightarrow (Eu_{,x})_{x = L} = t$, from constitutive relation .
 
 > $u_{,x} == \frac{du}{dx}$
 
-**For elasticity**: Dirichet boundary condition is called the **displacement boundary condition** and Neumann boundary condition is called the **traction boundary condition**. 
+**For elasticity**: Dirichet boundary condition is called the **displacement boundary condition** and Neumann boundary condition is called the **traction boundary condition**.
 
 ## Boundary condition（空间） $\neq$ Initial condition(时间)
 
@@ -70,7 +70,7 @@ x = 0, we have Dirichlet b.c.s (boundary conditions), but at x = L, we have eith
 
 **b) Dirichlet b.c at x = 0, Neumann b.c at x = L.**
 
-We do not consider both Neumann b.c.s at x = 0 and x = L. 
+We do not consider both Neumann b.c.s at x = 0 and x = L.
 
 > 当前，我们只能解决一端是固连的问题（至少有一个Dirichet条件）。原因在于：稳态。steady steate
 
@@ -116,7 +116,7 @@ $$
 
 with Dirichlet b.c.s or Dirichlet+Neumann.
 
-If substuting with constitutive relation: 
+If substuting with constitutive relation:
 $$
 \frac{d}{dx} (E\frac{du}{dx})+f = 0, in(0,L)
 $$
@@ -142,11 +142,11 @@ $$
 
 $E\frac{du}{dx}|_0$ is determined by applying b.c at z = L.
 
-> 已知u(L)的值就可以反求出$E\frac{du}{dx}|_0$ 
+> 已知u(L)的值就可以反求出$E\frac{du}{dx}|_0$
 
 If b.c. at x = L is a Neumann b.c, we first calculate $u_{,z}$  and then apply b.c $Eu_{,z}(L)$
 
-> Neumann 条件下无法直接知道u(L)，可以先把u(z)表达式求微分，然后用Neumann条件反求出$E\frac{du}{dx}|_0$ 
+> Neumann 条件下无法直接知道u(L)，可以先把u(z)表达式求微分，然后用Neumann条件反求出$E\frac{du}{dx}|_0$
 
 ## Weak form of the partial differential equation
 
@@ -154,11 +154,11 @@ $$
 Find\ u(x)\isin \mathcal{S} = \{u|u(0) = u_0\}
 $$
 
-The condition in S is the Dirichlet b.c. at x= 0, only. 
+The condition in S is the Dirichlet b.c. at x= 0, only.
 
-**Problem formulation(Weak form):** 
+**Problem formulation(Weak form):**
 
-Given $u_0$, $\sigma(L) = t$, f(x), and the constitutive relation $\sigma = Eu_{,x}$ 
+Given $u_0$, $\sigma(L) = t$, f(x), and the constitutive relation $\sigma = Eu_{,x}$
 
 Find $u(x)\isin \mathcal{S} = \{u|u(0) = u_0\}$ such that $\forall w\isin \mathcal{V} = \{w|w(0) = 0\} $, (homogenous Dirichlet b.c on w)
 $$
@@ -169,7 +169,7 @@ $$
 \int_0^L w_{i,x}\sigma Adx = \int_0^LwfAdx + w(L)tA
 $$
 
-## The strong form and weak form are equivalent 
+## The strong form and weak form are equivalent
 
 ### Strong form -> Weak form
 
@@ -196,13 +196,13 @@ $$
 
 
 
-So we have the weak form. 
+So we have the weak form.
 
 ### Weak form -> Strong form
 
 Starting from the weak form formulation:
 
-Given $u_0$, $\sigma(L) = t$, f(x), A, and the constitutive relation $\sigma = Eu_{,x}$ 
+Given $u_0$, $\sigma(L) = t$, f(x), A, and the constitutive relation $\sigma = Eu_{,x}$
 
 Find $u(x)\isin \mathcal{S} = \{u|u(0) = u_0\}$ such that $\forall w\isin \mathcal{V} = \{w|w(0) = 0\} $, (homogenous Dirichlet b.c on w)
 $$
@@ -237,4 +237,3 @@ e.o.d
 ## Intro to C++ (pointers, iterators)
 
 <img src="/Users/Zeyuan/Library/Application Support/typora-user-images/image-20210116234925800.png" alt="image-20210116234925800" style="zoom:50%;" />
-
