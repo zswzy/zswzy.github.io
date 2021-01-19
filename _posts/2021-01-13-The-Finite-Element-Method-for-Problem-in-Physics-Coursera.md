@@ -279,4 +279,111 @@ $$
 $$
 
 
+## 2.02-2.03. Basic Hilbert spaces
+
+Function spaces - **Hibert spaces**
+
+Recall
+$$
+u^h \isin \mathcal S^h = \{u^h \isin H^1(0,L)|u^h(0) = u_0\}
+$$
+
+### $L^2$ function 
+
+Consider a  function v: (0,L) -> R
+
+Define the function v to be L^2  - function if v is square integralable in (0,L):
+$$
+\int_0^L v^2dx < \infin
+$$
+ e.g.: constant, finite polymominal function, Heaviside function etc. are L2, Dirac is not L2
+
+We can in general define L^p function. L^p control the integral behaviour of a function. -> bounded
+
+How about control the derivative? --> Regularity. Hibert space.
+
+### Hibert space
+
+$ v(x) \isin H^1(0,L)$ if
+$$
+\int_0^L (v^2+L^2v_{,x}^2)dx<\infin
+$$
+
+> 由于求导会改变实际物理量的单位，因此引入 $L^2$ 来使量纲统一。
+
+In general use $m(0,L)^{1/d} = L$. m is a mesure. e.g,:  in R^3, d = 3, m(Omega)^{1/d}=m(Omega)^{1/3} = 'length'.
+$$
+\int_0^L (v^2+(m(0,L))^2v_{,x}^2)dx<\infin
+$$
+Now
+$$
+u^h \isin \mathcal S^h = \{u^h \isin H^1(0,L)|u^h(0) = u_0\}
+$$
+u^h and u_{,x}^h are suare integralable
+
+e.g.: constant, finite polynomial, combination of constant and polynomial(分段但连续)。连续函数在导数jump处也可以满足H1，但如果函数不连续，那么肯定不是H1。原因：在不连续处导数为狄拉克函数，无法二次积分。 
+
+![截屏2021-01-19 下午7.59.44](https://tva1.sinaimg.cn/large/008eGmZEgy1gmt97wpneqj30t10hwdpg.jpg)
+
+## 02.04. The finite element method for the one-dimensional, linear, elliptic partial differential equation
+
+Starting from the **Galekin (finite-dimensional)** Weak form:
+$$
+Find \\
+u^h \isin \mathcal S^h = \{u^h \isin H^1(0,L)|u^h(0) = u_0\} \\
+Such \ that\\
+\forall w^h \isin \mathcal V^h = \{w^h \isin H^1(0,L)|w^h(0) = 0\}, \\
+\int_0^L w_{,x}^h\sigma ^h A dx = \int_0^Lw^hfA dx + w^h(L)tA
+$$
+
+> $ u^h $ is also called "trial function". This imply that \sigma is also finite-dimensional.
+> $$
+> \sigma^h = Eu^h_{,x}\\
+> However,\ f(x) = f(x)
+> $$
+> Note that f (the known data) is not finite dimensional, no approximation.
+>
+> t is a point value
+
+The aim now is to obtain $u^h$ and $w^h$. (Or alternatively, $S^h$ and $V^h$)
+
+**Key idea: Partition (0,L) into "finite elements", which are disjoint subdomains of (0,L)**. 将区间分段覆盖。
+
+### Paritioning
+
+$$
+Partitioning \ \Omega = (0,L) \ into \\
+\Omega^1 = (x^1,x^2)\\
+\Omega^2 = (x^2,x^3)\\
+...\\
+\Omega^e = (x^e,x^{e+1})\\
+\Omega^{n_{el}} = (x^{n_{el}},x^{n_{el}+1})\\
+\Omega^e \ is\ open\ interval\\
+\bar \Omega = \bar \uni_{e=1}^{e=n_{el}}\Omega^e \\
+\bar \Omega  \ is \ the\ closure\ of\ \Omega\\
+\bar \Omega = \Omega \uni \part\Omega\ (boundary\ of\ \Omega)
+$$
+
+
+
+![截屏2021-01-19 下午8.22.40](https://tva1.sinaimg.cn/large/008eGmZEgy1gmt9vcimtwj30vp0j0dqs.jpg)
+
+![截屏2021-01-19 下午8.36.59](https://tva1.sinaimg.cn/large/008eGmZEly1gmtaal2rxcj30qj0fatfc.jpg)
+
+###  Terminology
+
+- $x^e$ is a node of the partition
+- $\Omega^e$ is an element
+
+Galerkin Weak form:
+$$
+\int_{\Omega} w_{,x}^h\sigma^hAdx = \int_{\Omega}w^hfAdx + w^h(L)tA \\
+$$
+
+$$
+\Longrightarrow \sum_{e-1}^{n_{el}}\int_{\Omega_e} w_{,x}^h\sigma^hAdx = \sum_{e-1}^{n_{el}} \int_{\Omega_e}w^hfAdx + w^h(L)tA \\
+$$
+
+Represent $S^h$ and $V^h$ over each $\Omega^e$
+
 
