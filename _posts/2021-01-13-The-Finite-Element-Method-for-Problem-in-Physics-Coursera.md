@@ -386,4 +386,20 @@ $$
 
 Represent $S^h$ and $V^h$ over each $\Omega^e$
 
+## 2.05-2.06 Basis function
 
+Galerkin Weak form:
+
+$$
+\Longrightarrow \sum_{e-1}^{n_{el}}\int_{\Omega_e} w_{,x}^h\sigma^hAdx = \sum_{e-1}^{n_{el}} \int_{\Omega_e}w^hfAdx + w^h(L)tA \\
+$$
+
+Representation of $u^h$ and $w^h$, over each $\Omega^e$. (Local representation)
+
+Define local basis function over $\Omega^e = (x^e,x^{e+1})$. Finite number of basis function over $\Omega^e$, and so over $\Omega$.
+
+**The basis function over $\Omega^e$: polynominals: linear** 
+
+![截屏2021-01-21 下午11.10.36](https://tva1.sinaimg.cn/large/008eGmZEly1gmvpyzjuhhj31bq0qq1kx.jpg)
+
+![截屏2021-01-21 下午11.24.36](https://tva1.sinaimg.cn/large/008eGmZEly1gmvqd9f823j31f40s41kx.jpg)
