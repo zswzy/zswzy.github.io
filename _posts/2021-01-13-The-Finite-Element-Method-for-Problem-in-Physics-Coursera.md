@@ -403,3 +403,41 @@ Define local basis function over $\Omega^e = (x^e,x^{e+1})$. Finite number of ba
 ![截屏2021-01-21 下午11.10.36](https://tva1.sinaimg.cn/large/008eGmZEly1gmvpyzjuhhj31bq0qq1kx.jpg)
 
 ![截屏2021-01-21 下午11.24.36](https://tva1.sinaimg.cn/large/008eGmZEly1gmvqd9f823j31f40s41kx.jpg)
+
+## 2.07-2.08 The bi-unit domain
+
+Each physical domain is associated with a local domain - bi-unit domain. The global basis function is associated with local  definition of local basis function, with each node $x^e$, with campact support in $\Omega^{e-1}$ and $\Omega^e$.
+
+![截屏2021-01-23 下午12.01.45](https://tva1.sinaimg.cn/large/008eGmZEly1gmxi11x1m8j315u0oingf.jpg)
+
+## 2.09-2.10 The finite dimensional weak form as a sum over element subdomains
+
+$$
+\xi _{,x} = \frac{2}{h^e}\\
+x_{,\xi}= \frac{h^e}{2}
+$$
+
+$h^e$ is the length of the element e.g. $h^e = x^{e+1}-x^e$
+$$
+u_{,x}^h=\sum_{A=1}^{N_{n_e}}N_{,\xi}^A\xi_{,x}d_e^A = \sum_{A=1}^{N_{n_e}}N_{,\xi}^A(\frac{2}{h^e})d_e^A \\
+w_{,x}^h=\sum_{A=1}^{N_{n_e}}N_{,\xi}^A\xi_{,x}c_e^A = \sum_{A=1}^{N_{n_e}}N_{,\xi}^A(\frac{2}{h^e})c_e^A
+$$
+Consider the integral
+$$
+\int_{\Omega^e}w_{,x}^h\sigma^hAdx=\int_{\Omega^e}w_{,x}^hEAu_{,x}^hdx\\
+=\int_{\Omega^e}(\sum_{A=1}^{N_{n_e}}N_{,\xi}^A\frac{2}{h^e}c_e^A)EA(\sum_{A=1}^{N_{n_e}}N_{,\xi}^B\frac{2}{h^e}d_e^B)dx
+$$
+
+$$
+\int_{\Omega^e}w^hf(x(\xi))Adx=\int_{\Omega^e}(\sum_AN^Ac_e^A)f(x(\xi))Adx
+$$
+
+Note that $dx = \frac{dx}{d\xi}d\xi=\frac{h^e}{2}d\xi$
+
+So we have:
+$$
+\int_{\Omega^e}w_{,x}^h\sigma^hAdx= \int_{\Omega^\xi}(\sum_{A=1}^{N_{n_e}}N_{,\xi}^A\frac{2}{h^e}c_e^A)EA(\sum_{A=1}^{N_{n_e}}N_{,\xi}^B\frac{2}{h^e}d_e^B)\frac{h^e}{2}d\xi\\
+\int_{\Omega^e}w^hf(x(\xi))Adx=\int_{\Omega^\xi}(\sum_AN^Ac_e^A)f(x(\xi))A\frac{h^e}{2}d\xi
+$$
+
+
