@@ -359,9 +359,9 @@ Partitioning \ \Omega = (0,L) \ into \\
 \Omega^e = (x^e,x^{e+1})\\
 \Omega^{n_{el}} = (x^{n_{el}},x^{n_{el}+1})\\
 \Omega^e \ is\ open\ interval\\
-\bar \Omega = \bar \uni_{e=1}^{e=n_{el}}\Omega^e \\
+\bar \Omega = \bar \cup _{e=1}^{e=n_{el}}\Omega^e \\
 \bar \Omega  \ is \ the\ closure\ of\ \Omega\\
-\bar \Omega = \Omega \uni \part\Omega\ (boundary\ of\ \Omega)
+\bar \Omega = \Omega \cup \part \Omega\ (boundary\ of\ \Omega)
 $$
 
 
