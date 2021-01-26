@@ -542,13 +542,12 @@ c_1^2 \frac{EA}{h^1}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{mat
 
 \Updownarrow\\
 
-EA\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
--\frac{1}{h^1}&\frac{1}{h^1}+\frac{1}{h^2}&-\frac{1}{h^2}&0&0&0&0 \\
-0&-\frac{1}{h^2}&\frac{1}{h^2}+\frac{1}{h^3}&-\frac{1}{h^3}&0&0&0 \\
-0&0&-\frac{1}{h^3}&\frac{1}{h^3}+\frac{1}{h^4}&-\frac{1}{h^4}&0&0 \\
-\vdots&\vdots&\ddots&\ddots&\ddots&\ddots&0\\
-0&0&0&0&-\frac{1}{h^{n_{el}-1}}&\frac{1}{h^{n_{el}-1}}+\frac{1}{h^{n_{el}}}&-\frac{1}{h^{n_{el}}}\\
-0&0&0&0&0&-\frac{1}{h^{n_{el}}}&\frac{1}{h^{n_{el}}}
+EA\left[\begin{matrix}c_2&c_3&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
+-\frac{1}{h^1}&\frac{1}{h^1}+\frac{1}{h^2}&-\frac{1}{h^2}&0&0&0 \\
+0&-\frac{1}{h^2}&\frac{1}{h^2}+\frac{1}{h^3}&-\frac{1}{h^3}&0&0 \\
+\vdots&\vdots&\ddots&\ddots&\ddots&\ddots\\
+0&0&0&-\frac{1}{h^{n_{el}-1}}&\frac{1}{h^{n_{el}-1}}+\frac{1}{h^{n_{el}}}&-\frac{1}{h^{n_{el}}}\\
+0&0&0&0&-\frac{1}{h^{n_{el}}}&\frac{1}{h^{n_{el}}}
 \end{matrix}\right]\left[\begin{matrix}d_1\\d_2\\d_3&\\\vdots\\d_{n_{el}}\\d_{n_{el}+1}\end{matrix}\right]\\
 =A_{e=1}^{n_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\underline{K_e}\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right]
 $$
@@ -579,13 +578,12 @@ $$
 
 Combine all together:
 $$
-EA\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
--\frac{1}{h^1}&\frac{1}{h^1}+\frac{1}{h^2}&-\frac{1}{h^2}&0&0&0&0 \\
-0&-\frac{1}{h^2}&\frac{1}{h^2}+\frac{1}{h^3}&-\frac{1}{h^3}&0&0&0 \\
-0&0&-\frac{1}{h^3}&\frac{1}{h^3}+\frac{1}{h^4}&-\frac{1}{h^4}&0&0 \\
-\vdots&\vdots&\ddots&\ddots&\ddots&\ddots&0\\
-0&0&0&0&-\frac{1}{h^{n_{el}-1}}&\frac{1}{h^{n_{el}-1}}+\frac{1}{h^{n_{el}}}&-\frac{1}{h^{n_{el}}}\\
-0&0&0&0&0&-\frac{1}{h^{n_{el}}}&\frac{1}{h^{n_{el}}}
+EA\left[\begin{matrix}c_2&c_3&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
+-\frac{1}{h^1}&\frac{1}{h^1}+\frac{1}{h^2}&-\frac{1}{h^2}&0&0&0 \\
+0&-\frac{1}{h^2}&\frac{1}{h^2}+\frac{1}{h^3}&-\frac{1}{h^3}&0&0 \\
+\vdots&\vdots&\ddots&\ddots&\ddots&\ddots\\
+0&0&0&-\frac{1}{h^{n_{el}-1}}&\frac{1}{h^{n_{el}-1}}+\frac{1}{h^{n_{el}}}&-\frac{1}{h^{n_{el}}}\\
+0&0&0&0&-\frac{1}{h^{n_{el}}}&\frac{1}{h^{n_{el}}}
 \end{matrix}\right]\left[\begin{matrix}d_1\\d_2\\d_3&\\\vdots\\d_{n_{el}}\\d_{n_{el}+1}\end{matrix}\right] \\
 =\frac{fA}{2}\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix}
 h^1+h^2\\
