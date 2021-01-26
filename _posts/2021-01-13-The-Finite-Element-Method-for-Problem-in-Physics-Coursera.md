@@ -440,4 +440,172 @@ $$
 \int_{\Omega^e}w^hf(x(\xi))Adx=\int_{\Omega^\xi}(\sum_AN^Ac_e^A)f(x(\xi))A\frac{h^e}{2}d\xi
 $$
 
+# Unit 3 Linear algebra; the matrix-vector form
 
+## 3.01 - 3.06  The matrix-vector weak form
+
+Recall, for the first element,
+$$
+\int_{\Omega^e}w_{,x}^h\sigma^hAdx= \int_{\Omega^\xi}(N_{,\xi}^2\frac{2}{h^e}c_e^2)EA(\sum_{B=1}^{N_{n_e}}N_{,\xi}^B\frac{2}{h^e}d_e^B)\frac{h^e}{2}d\xi \\
+\int_{\Omega^e}w^hfAdx=\int_{\Omega^\xi}(N^2c_e^2)f(x(\xi))A\frac{h^e}{2}d\xi
+$$
+for a general element:
+$$
+\int_{\Omega^e}w_{,x}^h\sigma^hAdx= \int_{\Omega^\xi}(\sum_{A=1}^{N_{n_e}}N_{,\xi}^A\frac{2}{h^e}c_e^A)EA(\sum_{A=1}^{N_{n_e}}N_{,\xi}^B\frac{2}{h^e}d_e^B)\frac{h^e}{2}d\xi = \sum_{A,B}c_e^A(\int_{\Omega^\xi}N_{,\xi}^A\frac{2EA}{h^e}N_{,\xi}^Bd\xi)d_e^B\\
+\int_{\Omega^e}w^hf(x(\xi))Adx=\int_{\Omega^\xi}(\sum_AN^Ac_e^A)f(x(\xi))A\frac{h^e}{2}d\xi=\sum_Ac_e^A\int_{\Omega^\xi}N^Af\frac{Ah^e}{2}d\xi
+$$
+for e=1, there is no sum over A. Instead use A=2.
+
+> $w^h(0)=0$, so, $w_{e=1}^h=N^2c_e^2$
+
+**To eliminate the sum, we use the matrix form** 
+$$
+\sum_{A,B}^{N_e=2}c_e^A(\int_{\Omega^\xi}N_{,\xi}^A\frac{2EA}{h^e}N_{,\xi}^Bd\xi)d_e^B \\
+=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{2EA}{h^e}(\int_{\Omega^\xi}\left[\begin{matrix}N_{,\xi}^1N_{,\xi}^1&N_{,\xi}^1N_{,\xi}^2\\N_{,\xi}^2N_{,\xi}^1&N_{,\xi}^2N_{,\xi}^2\end{matrix}\right]d\xi)\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \tag{*}
+$$
+
+> The condition is A is uniform over the element.
+
+Recall $N^1(\xi) = \frac{1-\xi}{2}, N^2(\xi) = \frac{1+\xi}{2}$, $N^1_{,\xi} = -\frac{1}{2}, N^2_{,\xi} = \frac{1}{2}$
+$$
+(*)=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{2EA}{h^e}\left[\begin{matrix}\frac{1}{4}&-\frac{1}{4}\\-\frac{1}{4}&\frac{1}{4}\end{matrix}\right](\int_{\Omega^\xi}d\xi)\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
+=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{2EA}{h^e}\left[\begin{matrix}\frac{1}{4}&-\frac{1}{4}\\-\frac{1}{4}&\frac{1}{4}\end{matrix}\right]\times2\times\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right]\\
+=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right]
+$$
+Using the same method, we have
+$$
+\sum_Ac_e^A\int_{\Omega^\xi}N^Af\frac{Ah^e}{2}d\xi=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{fAh^e}{2}\left[ \begin{matrix} 1 \\ 1 \end{matrix} \right]
+$$
+
+### Conclusion of new formulation of a matrix form over a general element
+
+$$
+\int_{\Omega^e}w_{,x}^h\sigma^hAdx=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
+\int_{\Omega^e}w^hfAdx=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{fAh^e}{2}\left[ \begin{matrix} 1 \\ 1 \end{matrix} \right]
+$$
+
+* Special case: e=1
+  $$
+  \int_{\Omega^e}w_{,x}^h\sigma^hAdx=c_e^2 \frac{EA}{h^e}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
+  \int_{\Omega^e}w^hfAdx= c_e^2 \frac{fAh^e}{2}
+  $$
+  
+
+Recall the galerkin weak form:
+$$
+\int_{\Omega} w_{,x}^h\sigma^hAdx = \int_{\Omega}w^hfAdx + w^h(L)tA \\
+$$
+Using matrix representation,
+$$
+c_1^2 \frac{EA}{h^1}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{matrix} d_1^1 \\ d_1^2 \end{matrix} \right]+\sum_{e=2}^{N_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] =c_1^2 \frac{fAh^1}{2}+\sum_{e=2}^{N_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\left[ \begin{matrix} \frac{fAh^e}{2} \\ \frac{fAh^e}{2} \end{matrix} \right]+c^2_{n_{el}}tA
+$$
+
+### Conclusion of new formulation of a matrix form over the whole interval
+
+$$
+\int_{\Omega} w_{,x}^h\sigma^hAdx = \int_{\Omega}w^hfAdx + w^h(L)tA \\
+\Updownarrow \\
+c_1^2 \frac{EA}{h^1}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{matrix} d_1^1 \\ d_1^2 \end{matrix} \right]+\sum_{e=2}^{N_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] =c_1^2 \frac{fAh^1}{2}+\sum_{e=2}^{N_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\left[ \begin{matrix} \frac{fAh^e}{2} \\ \frac{fAh^e}{2} \end{matrix} \right]+c^2_{n_{el}}tA
+$$
+
+> Remark: $u_e^h(x(\xi)) =\sum_AN^A(\xi)d_e^A$ ,  $w_e^h(x(\xi)) =\sum_B N^B(\xi)c_e^A$ 
+>
+> $u^h(x^e)=d_e^1$, $u^h(x^{e+1})=d_e^2$, $w^h(x^e)=c_e^1$, $w^h(x^{e+1})=c_e^2$: the Kronecker-delta property of the basis function ensure that the nodel dofs of the solution filed are indeed its values of the node.
+
+Note that the following map holds between local and global dofs 
+
+- local dof A in element e: $d_e^A$.
+
+- global dof of $x_{e+A-1}$: $d_{e+A-1}$: the value at $x=x_{e+A-1}$
+  $$
+  d_e^A = d_{e+A-1}
+  $$
+  
+
+  - e.g.: $d_1^1=d_1,d_1^2=d_2,...,d_{e=n_{el}}^1=d_{e=n_{el}},d_{e=n_{el}}^2=d_{e=n_{el+1}}$
+
+Similarly, 
+$$
+c_e^A = c_{e+A-1}
+$$
+![截屏2021-01-26 下午5.07.10](https://tva1.sinaimg.cn/large/008eGmZEly1gn17k6i1ptj319i0kunel.jpg)
+
+### Notation
+
+- Element stiffness matrix: $K_e = \frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]$
+- Element  force vector: $F_e= \left[ \begin{matrix} \frac{fAh^e}{2} \\ \frac{fAh^e}{2} \end{matrix}\right]$
+
+### The final formulation of the matrix form over the whole interval
+
+$$
+c_1^2 \frac{EA}{h^1}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{matrix} d_1^1 \\ d_1^2 \end{matrix} \right]+\sum_{e=2}^{N_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
+
+\Updownarrow\\
+
+EA\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
+-\frac{1}{h^1}&\frac{1}{h^1}+\frac{1}{h^2}&-\frac{1}{h^2}&0&0&0&0 \\
+0&-\frac{1}{h^2}&\frac{1}{h^2}+\frac{1}{h^3}&-\frac{1}{h^3}&0&0&0 \\
+0&0&-\frac{1}{h^3}&\frac{1}{h^3}+\frac{1}{h^4}&-\frac{1}{h^4}&0&0 \\
+\vdots&\vdots&\ddots&\ddots&\ddots&\ddots&0\\
+0&0&0&0&-\frac{1}{h^{n_{el}-1}}&\frac{1}{h^{n_{el}-1}}+\frac{1}{h^{n_{el}}}&-\frac{1}{h^{n_{el}}}\\
+0&0&0&0&0&-\frac{1}{h^{n_{el}}}&\frac{1}{h^{n_{el}}}
+\end{matrix}\right]\left[\begin{matrix}d_1\\d_2\\d_3&\\\vdots\\d_{n_{el}}\\d_{n_{el}+1}\end{matrix}\right]\\
+=A_{e=1}^{n_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\underline{K_e}\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right]
+$$
+
+>  A is the operator
+
+$$
+c_1^2 \frac{fAh^1}{2}+\sum_{e=2}^{N_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\left[ \begin{matrix} \frac{fAh^e}{2} \\ \frac{fAh^e}{2} \end{matrix} \right]\\
+\Updownarrow\\
+\frac{fA}{2}\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix}
+h^1+h^2\\
+h^2+h^3\\
+\vdots\\
+h^{n_{el}-1}+h^{n_{el}}\\
+h^{n_{el}}
+\end{matrix}\right] \\
+=A_{e=1}^{n_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\underline{F_e}
+$$
+
+$$
+c^2_{n_{el}}tA \Longleftrightarrow \left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix}
+0\\
+0\\
+\vdots\\
+tA
+\end{matrix}\right]
+$$
+
+Combine all together:
+$$
+EA\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
+-\frac{1}{h^1}&\frac{1}{h^1}+\frac{1}{h^2}&-\frac{1}{h^2}&0&0&0&0 \\
+0&-\frac{1}{h^2}&\frac{1}{h^2}+\frac{1}{h^3}&-\frac{1}{h^3}&0&0&0 \\
+0&0&-\frac{1}{h^3}&\frac{1}{h^3}+\frac{1}{h^4}&-\frac{1}{h^4}&0&0 \\
+\vdots&\vdots&\ddots&\ddots&\ddots&\ddots&0\\
+0&0&0&0&-\frac{1}{h^{n_{el}-1}}&\frac{1}{h^{n_{el}-1}}+\frac{1}{h^{n_{el}}}&-\frac{1}{h^{n_{el}}}\\
+0&0&0&0&0&-\frac{1}{h^{n_{el}}}&\frac{1}{h^{n_{el}}}
+\end{matrix}\right]\left[\begin{matrix}d_1\\d_2\\d_3&\\\vdots\\d_{n_{el}}\\d_{n_{el}+1}\end{matrix}\right] \\
+=\frac{fA}{2}\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix}
+h^1+h^2\\
+h^2+h^3\\
+\vdots\\
+h^{n_{el}-1}+h^{n_{el}}\\
+h^{n_{el}}
+\end{matrix}\right]+\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix}
+0\\
+0\\
+\vdots\\
+tA
+\end{matrix}\right] \\
+
+\Updownarrow\\
+
+A_{e=1}^{n_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\underline{K_e}\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right]=A_{e=1}^{n_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\underline{F_e}+\left[\begin{matrix}
+0\\
+0\\
+\vdots\\
+c_{n_{el}+1}tA
+\end{matrix}\right]
+$$
