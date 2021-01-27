@@ -578,6 +578,10 @@ $$
 
 Combine all together:
 $$
+\int_{\Omega} w_{,x}^h\sigma^hAdx = \int_{\Omega}w^hfAdx + w^h(L)tA \\
+
+\Updownarrow\\
+
 EA\left[\begin{matrix}c_2&c_3&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
 -\frac{1}{h^1}&\frac{1}{h^1}+\frac{1}{h^2}&-\frac{1}{h^2}&0&0&0 \\
 0&-\frac{1}{h^2}&\frac{1}{h^2}+\frac{1}{h^3}&-\frac{1}{h^3}&0&0 \\
@@ -607,3 +611,114 @@ A_{e=1}^{n_{el}}\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\underli
 c_{n_{el}+1}tA
 \end{matrix}\right]
 $$
+
+## 3.07 The final finite element equations in matrix-vector form
+
+Suppose $h^e$ are all the same value
+$$
+\int_{\Omega} w_{,x}^h\sigma^hAdx = \int_{\Omega}w^hfAdx + w^h(L)tA \\
+
+\Updownarrow\\
+
+\frac{EA}{h^e}\left[\begin{matrix}c_2&c_3&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
+-1&2&-1&0&0&0 \\
+0&-1&2&-1&0&0 \\
+\vdots&\vdots&\ddots&\ddots&\ddots&\ddots\\
+0&0&0&-1&2&-1\\
+0&0&0&0&-1&1
+\end{matrix}\right]\left[\begin{matrix}d_1\\d_2\\d_3&\\\vdots\\d_{n_{el}}\\d_{n_{el}+1}\end{matrix}\right] \\
+=\frac{fAh^e}{2}\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix}
+2\\
+2\\
+\vdots\\
+2\\
+1
+\end{matrix}\right]+\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix}
+0\\
+0\\
+\vdots\\
+tA
+\end{matrix}\right] \\
+$$
+Note that $d_1=u_0$
+$$
+\Updownarrow\\
+
+\frac{EA}{h^e}\left[\begin{matrix}c_2&c_3&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]\left[\begin{matrix} 
+2&-1&0&0&0 \\
+-1&2&-1&0&0 \\
+\vdots&\ddots&\ddots&\ddots&\ddots\\
+0&0&-1&2&-1\\
+0&0&0&-1&1
+\end{matrix}\right]\left[\begin{matrix}d_1\\d_2\\d_3&\\\vdots\\d_{n_{el}}\\d_{n_{el}+1}\end{matrix}\right] \\
+=\left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right] \{ \frac{fAh^e}{2}\left[\begin{matrix}
+2\\
+2\\
+\vdots\\
+2\\
+1
+\end{matrix}\right]+\left[\begin{matrix}
+0\\
+0\\
+\vdots\\
+tA
+\end{matrix}\right] + \frac{EA}{h^e}\left[\begin{matrix}
+u_0\\
+0\\
+\vdots\\
+0
+\end{matrix}\right]\}\\
+$$
+![截屏2021-01-27 下午8.14.40](https://tva1.sinaimg.cn/large/008eGmZEly1gn2ilmtf0ij31ce0p87wh.jpg)
+
+Notation:
+
+- $\underline{c}^T = \left[\begin{matrix}c_2&c_3&c_4&\dots&c_{n_{el}}&c_{n_{el}+1}\end{matrix}\right]$
+- $\underline d=\left[\begin{matrix}d_1\\d_2\\d_3&\\\vdots\\d_{n_{el}}\\d_{n_{el}+1}\end{matrix}\right]$
+- $\underline{K} (:n_{el}\times n_{el})=\frac{EA}{h^e}\left[\begin{matrix} 
+  2&-1&0&0&0 \\
+  -1&2&-1&0&0 \\
+  \vdots&\ddots&\ddots&\ddots&\ddots\\
+  0&0&-1&2&-1\\
+  0&0&0&-1&1
+  \end{matrix}\right]$
+- $\underline{F} =\frac{fAh^e}{2}\left[\begin{matrix}
+  2\\
+  2\\
+  \vdots\\
+  2\\
+  1
+  \end{matrix}\right]+\left[\begin{matrix}
+  0\\
+  0\\
+  \vdots\\
+  tA
+  \end{matrix}\right] + \frac{EA}{h^e}\left[\begin{matrix}
+  u_0\\
+  0\\
+  \vdots\\
+  0
+  \end{matrix}\right] $
+
+### Ultimate matrix representation weak form
+
+$$
+Find \ u^h \isin \mathcal S^h, w^h \isin \mathcal V^h,\\
+\int_{\Omega} w_{,x}^h\sigma^hAdx = \int_{\Omega}w^hfAdx + w^h(L)tA \\
+
+\Updownarrow\\
+
+\underline c^T \underline K \underline d = \underline c^T \underline F\ for \ \forall\underline c\isin \mathbb R^{n_{el}}  \\
+
+\Updownarrow\\
+
+\underline K \underline d =  \underline F\\
+\Rightarrow \underline d = \underline K^{-1}\underline F \\
+\Rightarrow u^h_e = \sum _A N^Ad_e^A
+$$
+
+*Remark*
+
+- $\underline K$ is symetric, positive definite with banded tridiagonal structure: stiffness matrix. (E>0, )
+- ![image-20210127203159996](https://tva1.sinaimg.cn/large/008eGmZEly1gn2j3fdmi9j31ca0f6k84.jpg)
+
