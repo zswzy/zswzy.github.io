@@ -486,8 +486,8 @@ $$
 
 * Special case: e=1
   $$
-  \int_{\Omega^e}w_{,x}^h\sigma^hAdx=c_e^2 \frac{EA}{h^e}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
-  \int_{\Omega^e}w^hfAdx= c_e^2 \frac{fAh^e}{2}
+  \int_{\Omega^e}w_{,x}^h\sigma^hAdx=c_1^2 \frac{EA}{h^e}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
+  \int_{\Omega^e}w^hfAdx= c_1^2 \frac{fAh^e}{2}
   $$
   
 
@@ -681,8 +681,8 @@ Notation:
   \vdots&\ddots&\ddots&\ddots&\ddots\\
   0&0&-1&2&-1\\
   0&0&0&-1&1
-  \end{matrix}\right]$
-- $\underline{F} =\frac{fAh^e}{2}\left[\begin{matrix}
+  \end{matrix}\right]$: stiffness matrix
+- forcing vector$\underline{F} =\frac{fAh^e}{2}\left[\begin{matrix}
   2\\
   2\\
   \vdots\\
@@ -721,4 +721,129 @@ $$
 
 - $\underline K$ is symetric, positive definite with banded tridiagonal structure: stiffness matrix. (E>0, )
 - ![image-20210127203159996](https://tva1.sinaimg.cn/large/008eGmZEly1gn2j3fdmi9j31ca0f6k84.jpg)
+
+# Unit 4: More on boundary conditions; basis functions; numerics.
+
+## 4.01-4.02 The pure Dirichlet problem 
+
+### Problem formulation
+
+Find $u^h \isin \mathcal S^h \subset \mathcal S= \{u|u(0) = u_0, u(L) = u_g\}$
+
+$\mathcal S^h = \{u^h \isin H^1(\Omega)|u(0) = u_0, u(L) = u_g\}$
+
+Such that $\forall w^h\isin \mathcal V^h \subset \mathcal V = \{w|w(0) = 0,w(L) =0\}$
+
+$\mathcal V^h = \{w^h \isin H^1(\Omega)|w(0) = 0, w(L) = 0\}$
+$$
+\int_{\Omega} w_{,x}^h\sigma^hAdx = \int_{\Omega}w^hfAdx
+$$
+
+### Basis function
+
+linear polynomial over $\Omega^e$
+
+$ w_{e=1}^h = N^2(\xi)c_{e=1}^h$, $w_{e=n_{el}}^h=N^1(\xi)c_{e=n_{el}}^h$
+
+### Matrix form
+
+general form:
+$$
+\int_{\Omega^e}w_{,x}^h\sigma^hAdx=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
+\int_{\Omega^e}w^hfAdx=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{fAh^e}{2}\left[ \begin{matrix} 1 \\ 1 \end{matrix} \right] \\
+\sum_e\int_{\Omega^e}w_{,x}^h\sigma^hAdx=\sum_e\int_{\Omega^e}w^hfAdx
+$$
+
+- for $e=1$
+  $$
+  \int_{\Omega^e}w_{,x}^h\sigma^hAdx=c_1^2 \frac{EA}{h^e}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
+  \int_{\Omega^e}w^hfAdx= c_1^2 \frac{fAh^e}{2}
+  $$
+  
+
+- for $e=n_{el}$
+  $$
+  \int_{\Omega^e}w_{,x}^h\sigma^hAdx=c_{n_{el}}^1 \frac{EA}{h^e}\left[\begin{matrix}1&-1\end{matrix}\right]\left[ \begin{matrix} d_{n_{el}}^1 \\ d_{n_{el}}^2 \end{matrix} \right] \\
+  \int_{\Omega^e}w^hfAdx= c_{n_{el}}^1 \frac{fAh^e}{2}
+  $$
+
+- for $e=2,3,\dots ,n_{el}-1$
+  $$
+  \int_{\Omega^e}w_{,x}^h\sigma^hAdx=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right] \\
+  \int_{\Omega^e}w^hfAdx=\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{fAh^e}{2}\left[ \begin{matrix} 1 \\ 1 \end{matrix} \right]
+  $$
+  To sum up:
+  $$
+  \int_{\Omega^e}w_{,x}^h\sigma^hAdx=c_1^2 \frac{EA}{h^e}\left[\begin{matrix}-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right]+\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{EA}{h^e}\left[\begin{matrix}1&-1\\-1&1\end{matrix}\right]\left[ \begin{matrix} d_e^1 \\ d_e^2 \end{matrix} \right]+c_{n_{el}}^1 \frac{EA}{h^e}\left[\begin{matrix}1&-1\end{matrix}\right]\left[ \begin{matrix} d_{n_{el}}^1 \\ d_{n_{el}}^2 \end{matrix} \right] \\
+  
+  \int_{\Omega^e}w^hfAdx= c_1^2 \frac{fAh^e}{2}+\left[ \begin{matrix} c_e^1 & c_e^2 \end{matrix} \right]\frac{fAh^e}{2}\left[ \begin{matrix} 1 \\ 1 \end{matrix} \right]+\int_{\Omega^e}w^hfAdx= c_{n_{el}}^1 \frac{fAh^e}{2}
+  $$
+  
+
+### Assembly
+
+$$
+\Updownarrow\\
+
+\frac{EA}{h^e}\left[\begin{matrix}c_2&\dots&c_{n_{el}}\end{matrix}\right]\left[\begin{matrix} 
+2&-1&0&0&0 \\
+-1&2&-1&0&0 \\
+\vdots&\ddots&\ddots&\ddots&\ddots\\
+0&0&-1&2&-1\\
+0&0&0&-1&2
+\end{matrix}\right]\left[\begin{matrix}d_2\\\vdots\\d_{n_{el}}\end{matrix}\right] 
+
+=\left[\begin{matrix}c_2\dots&c_{n_{el}}\end{matrix}\right] \{ \frac{fAh^e}{2}\left[\begin{matrix}
+2\\
+\vdots\\
+2
+\end{matrix}\right]+\frac{EA}{h^e}\left[\begin{matrix}
+u_0\\
+0\\
+\vdots\\
+0
+\end{matrix}\right] + \frac{EA}{h^e}\left[\begin{matrix}
+0\\
+0\\
+\vdots\\
+u_g
+\end{matrix}\right]\}\\
+$$
+
+Notation:
+
+- $\underline{c}^T = \left[\begin{matrix}c_2&\dots&c_{n_{el}}\end{matrix}\right]$
+- $\underline d=\left[\begin{matrix}d_2\\\vdots\\d_{n_{el}}\end{matrix}\right]$
+- stiffness matrix: $\underline{K} (:n_{el}-1\times n_{el}-1)=\frac{EA}{h^e}\left[\begin{matrix} 
+  2&-1&0&0&0 \\
+  -1&2&-1&0&0 \\
+  \vdots&\ddots&\ddots&\ddots&\ddots\\
+  0&0&-1&2&-1\\
+  0&0&0&-1&2
+  \end{matrix}\right]$
+- Forcing vector$\underline{F} =\frac{fAh^e}{2}\left[\begin{matrix}
+  2\\
+  \vdots\\
+  2
+  \end{matrix}\right]+\frac{EA}{h^e}\left[\begin{matrix}
+  u_0\\
+  0\\
+  \vdots\\
+  0
+  \end{matrix}\right] + \frac{EA}{h^e}\left[\begin{matrix}
+  0\\
+  0\\
+  \vdots\\
+  u_g
+  \end{matrix}\right] $
+
+$$
+\underline c^T \underline K \underline d = \underline c^T \underline F\ for \ \forall\underline c\isin \mathbb R^{n_{el}-1}  \\
+
+\Updownarrow\\
+
+\underline K \underline d =  \underline F\\
+$$
+
+*Remark*: The forcing vector is composed of three parts: part1 is forcing function, part2 is Dirichlet "forcing" at x=0, part3 is Dirichlet "forcing" at x=L.
 
