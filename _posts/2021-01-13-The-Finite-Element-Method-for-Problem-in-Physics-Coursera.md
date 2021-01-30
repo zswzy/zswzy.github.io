@@ -1295,3 +1295,11 @@ $$
 
 A gaussian quadrature rule with $n_{int}$ points exactly integrates polynomials of order <= 2$n_{int}-1$
 
+# Coding assignment1
+
+![image-20210130212245596](/Users/zeyuan/Library/Application Support/typora-user-images/image-20210130212245596.png)
+
+![image-20210130212612683](https://tva1.sinaimg.cn/large/008eGmZEly1gn61iqpxq5j310u0c4dlq.jpg)
+
+![image-20210130213206339](https://tva1.sinaimg.cn/large/008eGmZEly1gn61ovo7lij30xu0dial0.jpg)
+
