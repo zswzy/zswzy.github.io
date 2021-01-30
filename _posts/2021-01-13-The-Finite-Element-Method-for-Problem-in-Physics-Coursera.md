@@ -1256,5 +1256,42 @@ $$
 N^A(\xi)=\frac{\Pi_{B=1,\neq A}^{N_{n_e}}(\xi-\xi^B)}{\Pi_{B=1,\neq A}^{N_{n_e}}(\xi^A-\xi^B)}
 $$
 
-## 4.07-4.10. The matrix-vector equations for quadratic basis functions
+## 4.11. Numerical integration -- Gaussian quadrature
+
+Numerical integration is needed if E, f, A,... are complicated function w.r.t x, also if complicated basis functions are used.
+
+Gaussian quadrature: optimal for polynomials
+
+Consider
+$$
+\int_{-1}^1g(\xi)d\xi
+$$
+
+### The general gaussian quadrature form
+
+$$
+\int_{-1}^1g(\xi) d\xi=\sum_{l=1}^{n_{int}}g(\xi_l)w_l
+$$
+
+- $n_{int}$: number of integration point
+- $\xi_l$: an integration point: l=1,...,$n_{int}$
+- $w_l$: weight ascribed to the integration point, l=1,...,$n_{int}$
+
+### Integration rule
+
+| $n_{int}$     | $\xi$                       | w                 |
+| ------------- | --------------------------- | ----------------- |
+| $n_{int}=1$   | $\xi_1=0$                   | $w_1=2$           |
+|               |                             |                   |
+| $n_{int}=2$   | $\xi_1=-\frac{1}{\sqrt3}$   | $w_1=1$           |
+|               | $\xi_2=\frac{1}{\sqrt3}$    | $w_2=1$           |
+|               |                             |                   |
+| $n_{int}=3$   | $\xi_1=-\sqrt{\frac{3}{5}}$ | $w_1=\frac{5}{9}$ |
+|               | $\xi_2=0$                   | $w_1=\frac{8}{9}$ |
+|               | $\xi_3=\sqrt{\frac{3}{5}}$  | $w_1=\frac{5}{9}$ |
+|               |                             |                   |
+| $n_{int}=...$ |                             |                   |
+|               |                             |                   |
+
+A gaussian quadrature rule with $n_{int}$ points exactly integrates polynomials of order <= 2$n_{int}-1$
 
