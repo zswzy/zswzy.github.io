@@ -1,4 +1,5 @@
 ---
+
 layout:     post
 title:      有限元分析基础课程-Coursera
 subtitle:   
@@ -12,7 +13,6 @@ tags:
 ---
 - 这里是一个目录
 {:toc}
-
 # The Finite Element Method for Problem in Physics - Coursera
 
 这是什么？
@@ -760,7 +760,6 @@ $$
   \int_{\Omega^e}w^hfAdx= c_1^2 \frac{fAh^e}{2}
   $$
   
-
 - for $e=n_{el}$
   $$
   \int_{\Omega^e}w_{,x}^h\sigma^hAdx=c_{n_{el}}^1 \frac{EA}{h^e}\left[\begin{matrix}1&-1\end{matrix}\right]\left[ \begin{matrix} d_{n_{el}}^1 \\ d_{n_{el}}^2 \end{matrix} \right] \\
@@ -846,4 +845,416 @@ $$
 $$
 
 *Remark*: The forcing vector is composed of three parts: part1 is forcing function, part2 is Dirichlet "forcing" at x=0, part3 is Dirichlet "forcing" at x=L.
+
+## 4.03-4.06 Higher polynomial order basis functions
+
+### Quadratic basis function
+
+#### element
+
+The element is conposed of 3 nodes:
+
+<img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn4w3fsyhwj30qe084dgf.jpg" alt="image-20210129213225476" style="zoom:50%;" />
+
+#### bi-unit domain:
+
+![image-20210129213343189](https://tva1.sinaimg.cn/large/008eGmZEly1gn4w48tv4lj311q05u41y.jpg)
+
+#### Trial function
+
+ $u^h_e=\sum_A=1^{N_{n_e}=3}N^A(x(\xi))d_e^A$
+
+#### weighting function
+
+ $w_e^h = \sum_A=1^{N_{n_e}=3}N^A(x(\xi))c_e^A$
+
+#### Basis function
+
+ $N^1(\xi)=-\frac{\xi(1-\xi)}{2}$, $N^2(\xi)=1-\xi^2$, $N^3(\xi)=\frac{\xi(1+\xi)}{2}$
+
+![image-20210129213834207](/Users/zeyuan/Library/Application Support/typora-user-images/image-20210129213834207.png)
+
+Properties: $N^A(\xi^B)=\delta_{AB}$, $\sum_A N^A(\xi)=1$
+
+#### Formulation of the problem
+
+$$
+\int_{\Omega^e} w_{,x}^h\sigma^hAdx = \int_{\Omega^e}w^hfAdx +w(L)tA\\
+\Updownarrow\\
+\int_{\Omega^e} w_{,x}^hEAu_{,x}^hdx = \int_{\Omega^e}w^hfAdx+w(L)tA
+$$
+
+#### Formula expansion
+
+$$
+\int_{\Omega^e} w_{,x}^hEAu_{,x}^hdx=\int_{\Omega^e}(\sum_{A=1}^3 N_{,\xi}^A\xi_{,x}c_e^A)EA(\sum_{B=1}^3N_{,\xi}^B\xi_{,x}d_e^B)dx \\
+\int_{\Omega^e}w^hfAdx =\int_{\Omega^e}(\sum_AN^Ac_e^A)fAdx = \sum_A^3c_e^A \int_{\Omega^e}N^AfAdx
+$$
+
+Note that 
+
+- $N_{,\xi}^1=\frac{1}{2}(-1+2\xi)$
+- $N_{,\xi}^2=-2\xi$
+- $N_{,\xi}^3=\frac{1}{2}(1+2\xi)$
+- $\xi_{,x}=\frac{2}{h^e}$, $x_{,\xi}=\frac{h^e}{2}$
+
+> 注意现在h^e 的定义为$x_e^3-x^1_e$
+
+Rewrite the expansion:
+$$
+\int_{\Omega^e} w_{,x}^hEAu_{,x}^hdx=\int_{\Omega^e}(\sum_{A=1}^3 N_{,\xi}^A\frac{2}{h^e}c_e^A)EA(\sum_{B=1}^3N_{,\xi}^B\frac{2}{h^e}d_e^B)\frac{h^e}{2} d\xi \\
+\int_{\Omega^e}w^hfAdx = \sum_A^3c_e^A \int_{\Omega^\xi}N^AfA\frac{h^e}{2}d\xi
+$$
+Using vector-matrix notation:
+$$
+\int_{\Omega^e} w_{,x}^hEAu_{,x}^hdx=\frac{2EA}{h^e}\sum_{A,B}c_e^A(\int_{\Omega_{\xi}}N_{,\xi}^AN_{,\xi}^B d\xi)d_e^B \\
+=\left[ \begin{matrix}c_e^1& c_e^2&c_e^3\end{matrix} \right] \frac{2EA}{h^e}
+\int_{-1}^1\left[ \begin{matrix}
+N_{,\xi}^1N_{,\xi}^1 & N_{,\xi}^1N_{,\xi}^2&N_{,\xi}^1N_{,\xi}^3 \\
+N_{,\xi}^2N_{,\xi}^1 & N_{,\xi}^2N_{,\xi}^2&N_{,\xi}^2N_{,\xi}^3 \\
+N_{,\xi}^3N_{,\xi}^1 & N_{,\xi}^3N_{,\xi}^2&N_{,\xi}^3N_{,\xi}^3 
+\end{matrix} \right]d\xi
+\left[ \begin{matrix}d_e^1\\ d_e^2\\d_e^3\end{matrix} \right] \\
+
+\int_{\Omega^e}w^hfAdx = \sum_A^3c_e^A \int_{\Omega^\xi}N^AfA\frac{h^e}{2}d\xi \\
+=\left[ \begin{matrix}c_e^1& c_e^2&c_e^3\end{matrix} \right] \frac{fAh^e}{2} \int_{-1}^1 \left[ \begin{matrix}
+N_{,\xi}^1 \\
+N_{,\xi}^2 \\
+N_{,\xi}^3
+\end{matrix} \right]d\xi
+$$
+Note that :
+
+- $\int_{-1}^1 N_{,\xi}^1N_{,\xi}^1 d\xi=\frac{7}{6}$
+- $\int_{-1}^1 N_{,\xi}^1N_{,\xi}^2 d\xi=-\frac{4}{3}$
+- $\int_{-1}^1 N_{,\xi}^1N_{,\xi}^3 d\xi=\frac{1}{6}$
+- $\int_{-1}^1 N_{,\xi}^2N_{,\xi}^2 d\xi=\frac{8}{3}$
+- $\int_{-1}^1 N_{,\xi}^2N_{,\xi}^3 d\xi=-\frac{4}{3}$
+- $\int_{-1}^1 N_{,\xi}^3N_{,\xi}^3 d\xi=\frac{7}{6}$
+- $\int_{-1}^1 N_{,\xi}^1 d\xi=\frac{1}{3}$
+- $\int_{-1}^1 N_{,\xi}^2 d\xi=\frac{4}{3}$
+- $\int_{-1}^1 N_{,\xi}^3 d\xi=\frac{1}{3}$
+
+
+
+The final result is 
+$$
+\int_{\Omega^e} w_{,x}^hEAu_{,x}^hdx=\frac{2EA}{h^e}\sum_{A,B}c_e^A(\int_{\Omega_{\xi}}N_{,\xi}^AN_{,\xi}^B d\xi)d_e^B \\
+
+=\left[ \begin{matrix}c_e^1& c_e^2&c_e^3\end{matrix} \right] \frac{2EA}{h^e}
+\left[ \begin{matrix}
+\frac{7}{6} & -\frac{4}{3}&\frac{1}{6} \\
+-\frac{4}{3} & \frac{8}{3}&-\frac{4}{3} \\
+\frac{1}{6} & -\frac{4}{3}&\frac{7}{6}
+\end{matrix} \right]
+\left[ \begin{matrix}d_e^1\\ d_e^2\\d_e^3\end{matrix} \right] \\
+
+\int_{\Omega^e}w^hfAdx = \sum_A^3c_e^A \int_{\Omega^\xi}N^AfA\frac{h^e}{2}d\xi \\
+=\left[ \begin{matrix}c_e^1& c_e^2&c_e^3\end{matrix} \right] \frac{fAh^e}{2} \left[ \begin{matrix}
+\frac{1}{3} \\
+\frac{4}{3} \\
+\frac{1}{3}
+\end{matrix} \right]
+$$
+Element stiffness matrix: $\frac{2EA}{h^e}
+\left[ \begin{matrix}
+\frac{7}{6} & -\frac{4}{3}&\frac{1}{6} \\
+-\frac{4}{3} & \frac{8}{3}&-\frac{4}{3} \\
+\frac{1}{6} & -\frac{4}{3}&\frac{7}{6}
+\end{matrix} \right]$
+
+
+
+#### Assembly
+
+$$
+\sum_e \int_{\Omega^e} w_{,x}^h\sigma^hAdx = \sum_e \int_{\Omega^e}w^hfAdx +w(L)tA\\
+$$
+
+Recall for D-N problem, $u^h(0)=u_0$, $w^h(0)=0$, and $c^1=0$, $d^1=u_0$
+$$
+\sum_e \int_{\Omega^e} w_{,x}^h\sigma^hAdx\\
+
+=\left[ \begin{matrix} c^2&c^3\end{matrix} \right] \frac{2EA}{h^1}
+\left[ \begin{matrix}
+-\frac{4}{3} & \frac{8}{3}&-\frac{4}{3} \\
+\frac{1}{6} & -\frac{4}{3}&\frac{7}{6}
+\end{matrix} \right]
+\left[ \begin{matrix}d^1\\ d^2\\d^3\end{matrix} \right] + 
+
+\sum_{e=2}^{n_{el}} \left[ \begin{matrix}c^{2e-1}& c^{2e}&c^{2e+1}\end{matrix} \right] \frac{2EA}{h^e}
+\left[ \begin{matrix}
+\frac{7}{6} & -\frac{4}{3}&\frac{1}{6} \\
+-\frac{4}{3} & \frac{8}{3}&-\frac{4}{3} \\
+\frac{1}{6} & -\frac{4}{3}&\frac{7}{6}
+\end{matrix} \right]
+\left[ \begin{matrix}d^{2e-1}\\ d^{2e}\\d^{2e+1}\end{matrix} \right] \\
+
+=\left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}&c^{2n_{el}+1}\end{matrix} \right] 
+\frac{2EA}{h} 
+\left[ \begin{matrix}
+-\frac{4}{3} & \frac{8}{3} & -\frac{3}{4} & 0 & 0 & 0& 0& \dots  \\
+\frac{1}{6} & -\frac{4}{3} & \frac{7}{6}+ \frac{7}{6} & -\frac{4}{3} & \frac{1}{6} & 0& 0& \dots \\
+0 & 0&-\frac{4}{3}&\frac{8}{3}&-\frac{4}{3}&0&  0&\dots \\
+0&0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{6}+ \frac{7}{6} & -\frac{4}{3}&  0 & \dots \\
+\vdots &\vdots &\vdots &\ddots &\ddots &\ddots &\ddots &\vdots \\
+0&0&0 & 0&0& ...+ \frac{7}{6} & -\frac{4}{3} & \frac{1}{6} \\
+0&0&0 & 0&0&-\frac{4}{3} & \frac{8}{3} & -\frac{3}{4} \\
+0&0&0 & 0&0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{6} \\
+\end{matrix} \right] 
+\left[ \begin{matrix}d^1\\d^2\\d^3\\d^4\\d^5\\\vdots\\d^{2n_{el}-1}\\ d^{2n_{el}}\\d^{2n_{el}+1}\end{matrix} \right]
+$$
+
+$$
+\int_{\Omega^e}w^hfAdx  \\
+=\left[ \begin{matrix}c^2&c^3\end{matrix} \right] \frac{fAh^1}{2} \left[ \begin{matrix}
+\frac{1}{3} \\
+\frac{4}{3} 
+\end{matrix} \right] + 
+
+\sum_{e=2}^{n_{el}}  \left[ \begin{matrix}c^{2e-1}& c^{2e}&c^{2e+1}\end{matrix} \right] \frac{fAh^e}{2} \left[ \begin{matrix}
+\frac{1}{3} \\
+\frac{4}{3} \\
+\frac{1}{3}
+\end{matrix} \right] \\
+
+= \left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}&c^{2n_{el}+1}\end{matrix} \right] (\frac{fAh}{2}
+
+\left[ \begin{matrix}
+\frac{4}{3}\\
+\frac{1}{3}+\frac{1}{3} \\
+\frac{4}{3} \\
+\frac{1}{3}+...\\
+\vdots\\
+...+\frac{1}{3}\\
+\frac{4}{3} \\
+\frac{1}{3} 
+\end{matrix} \right] +
+
+\left[ \begin{matrix}
+0\\
+\vdots\\
+0 \\
+tA
+\end{matrix} \right])
+$$
+
+Conclusion:
+$$
+\left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}&c^{2n_{el}+1}\end{matrix} \right] 
+\frac{2EA}{h} 
+\left[ \begin{matrix}
+-\frac{4}{3} & \frac{8}{3} & -\frac{3}{4} & 0 & 0 & 0& 0& \dots  \\
+\frac{1}{6} & -\frac{4}{3} & \frac{7}{6}+ \frac{7}{6} & -\frac{4}{3} & \frac{1}{6} & 0& 0& \dots \\
+0 & 0&-\frac{4}{3}&\frac{8}{3}&-\frac{4}{3}&0&  0&\dots \\
+0&0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{6}+ \frac{7}{6} & -\frac{4}{3}&  0 & \dots \\
+\vdots &\vdots &\vdots &\ddots &\ddots &\ddots &\ddots &\vdots \\
+0&0&0 & 0&0& ...+ \frac{7}{6} & -\frac{4}{3} & \frac{1}{6} \\
+0&0&0 & 0&0&-\frac{4}{3} & \frac{8}{3} & -\frac{3}{4} \\
+0&0&0 & 0&0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{6} \\
+\end{matrix} \right] 
+\left[ \begin{matrix}d^1\\d^2\\d^3\\d^4\\d^5\\\vdots\\d^{2n_{el}-1}\\ d^{2n_{el}}\\d^{2n_{el}+1}\end{matrix} \right]\\
+
+= \left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}&c^{2n_{el}+1}\end{matrix} \right] (\frac{fAh}{2}
+
+\left[ \begin{matrix}
+\frac{4}{3}\\
+\frac{2}{3} \\
+\frac{4}{3} \\
+\frac{2}{3}\\
+\vdots\\
+\frac{2}{3}\\
+\frac{4}{3} \\
+\frac{1}{3} 
+\end{matrix} \right] +
+
+\left[ \begin{matrix}
+0\\
+\vdots\\
+0 \\
+tA
+\end{matrix} \right])
+$$
+
+> Sparse matrix: most of the elements are 0
+
+Extract d^1 and the first column of the stiffness matrix, then matrix in both side are of size 2n_{el}:
+$$
+\left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}&c^{2n_{el}+1}\end{matrix} \right] 
+\frac{2EA}{h} 
+\left[ \begin{matrix}
+ \frac{8}{3} & -\frac{3}{4} & 0 & 0 & 0& 0& \dots  \\
+ -\frac{4}{3} & \frac{7}{3} & -\frac{4}{3} & \frac{1}{6} & 0& 0& \dots \\
+ 0&-\frac{4}{3}&\frac{8}{3}&-\frac{4}{3}&0&  0&\dots \\
+0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{3} & -\frac{4}{3}&  0 & \dots \\
+\vdots &\vdots &\ddots &\ddots &\ddots &\ddots &\vdots \\
+0&0 & 0&0&\frac{7}{3} & -\frac{4}{3} & \frac{1}{6} \\
+0&0 & 0&0&-\frac{4}{3} & \frac{8}{3} & -\frac{3}{4} \\
+0&0 & 0&0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{6} \\
+\end{matrix} \right] 
+\left[ \begin{matrix}d^2\\d^3\\d^4\\d^5\\\vdots\\d^{2n_{el}-1}\\ d^{2n_{el}}\\d^{2n_{el}+1}\end{matrix} \right]\\
+
+= \left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}&c^{2n_{el}+1}\end{matrix} \right] (\frac{fAh}{2}
+\left[ \begin{matrix}
+\frac{4}{3}\\
+\frac{2}{3} \\
+\frac{4}{3} \\
+\frac{2}{3}\\
+\vdots\\
+\frac{2}{3}\\
+\frac{4}{3} \\
+\frac{1}{3} 
+\end{matrix} \right] +
+\left[ \begin{matrix}
+0\\
+\vdots\\
+0 \\
+\end{matrix} \right] - 
+\frac{2EA}{h} u_0
+\left[ \begin{matrix}
+-\frac{4}{3}\\
+\frac{1}{6}\\
+0\\
+\vdots\\
+0 \\
+tA
+\end{matrix} \right])
+$$
+Notations:
+
+- $\underline c^T=\left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}&c^{2n_{el}+1}\end{matrix} \right]$
+- $\underline K =\frac{2EA}{h} 
+  \left[ \begin{matrix}
+   \frac{8}{3} & -\frac{3}{4} & 0 & 0 & 0& 0& \dots  \\
+   -\frac{4}{3} & \frac{7}{3} & -\frac{4}{3} & \frac{1}{6} & 0& 0& \dots \\
+   0&-\frac{4}{3}&\frac{8}{3}&-\frac{4}{3}&0&  0&\dots \\
+  0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{3} & -\frac{4}{3}&  0 & \dots \\
+  \vdots &\vdots &\ddots &\ddots &\ddots &\ddots &\vdots \\
+  0&0 & 0&0&\frac{7}{3} & -\frac{4}{3} & \frac{1}{6} \\
+  0&0 & 0&0&-\frac{4}{3} & \frac{8}{3} & -\frac{3}{4} \\
+  0&0 & 0&0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{6} \\
+  \end{matrix} \right] $
+- $\underline F=\frac{fAh}{2}
+  \left[ \begin{matrix}
+  \frac{4}{3}\\
+  \frac{2}{3} \\
+  \frac{4}{3} \\
+  \frac{2}{3}\\
+  \vdots\\
+  \frac{2}{3}\\
+  \frac{4}{3} \\
+  \frac{1}{3} 
+  \end{matrix} \right] +
+  \left[ \begin{matrix}
+  0\\
+  \vdots\\
+  0 \\
+  tA
+  \end{matrix} \right] - 
+  \frac{2EA}{h} u_0
+  \left[ \begin{matrix}
+  -\frac{4}{3}\\
+  \frac{1}{6}\\
+  0\\
+  \vdots\\
+  0 \\
+  \end{matrix} \right]$
+- $\underline d= \left[ \begin{matrix}d^2\\d^3\\d^4\\d^5\\\vdots\\d^{2n_{el}-1}\\ d^{2n_{el}}\\d^{2n_{el}+1}\end{matrix} \right]$ 
+
+Conclusion: 
+$$
+\underline c^T \underline K \underline d = \underline c^T \underline F\ \\
+ \underline d = \underline K^{-1} \underline F\
+$$
+
+#### Remarks
+
+- K matrix components are different from the linear case.
+
+- Bandwidth of K is 5 - due to use of quadratic basis function .
+
+- Midside nodes have a larger contribution to F vector - due to use of quadratic basis function.
+
+  - > F 向量中，处于element节点处的数值（4/3）大于element内部节点的数值（2/3）
+
+#### Consider the pure Dirichlet problem
+
+Find $u^h \isin \mathcal S^h \subset \mathcal S= \{u|u(0) = u_0, u(L) = u_g\}$
+
+$\mathcal S^h = \{u^h \isin H^1(\Omega)|u(0) = u_0, u(L) = u_g\}$
+
+Such that $\forall w^h\isin \mathcal V^h \subset \mathcal V = \{w|w(0) = 0,w(L) =0\}$
+
+$\mathcal V^h = \{w^h \isin H^1(\Omega)|w(0) = 0, w(L) = 0\}$
+$$
+\int_{\Omega} w_{,x}^h\sigma^hAdx = \int_{\Omega}w^hfAdx
+$$
+
+The main feature of the D-D problem is :
+$$
+c^1 = c^{n_{el}+1} =0 \\
+d^1 = u_0\\
+d^{n_{el}+1} =u_g \\
+$$
+Therefor, the matrix representation becomes:
+$$
+\left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}\end{matrix} \right] 
+\frac{2EA}{h} 
+\left[ \begin{matrix}
+ \frac{8}{3} & -\frac{3}{4} & 0 & 0 & 0& 0  \\
+ -\frac{4}{3} & \frac{7}{3} & -\frac{4}{3} & \frac{1}{6} & 0& 0 \\
+ 0&-\frac{4}{3}&\frac{8}{3}&-\frac{4}{3}&0&  0 \\
+0&\frac{1}{6} & -\frac{4}{3} & \frac{7}{3} & -\frac{4}{3}&  0  \\
+\vdots &\vdots &\ddots &\ddots &\ddots &\ddots  \\
+0&0 & 0&0&\frac{7}{3} & -\frac{4}{3}  \\
+0&0 & 0&0&-\frac{4}{3} & \frac{8}{3} 
+\end{matrix} \right] 
+\left[ \begin{matrix}d^2\\d^3\\d^4\\d^5\\\vdots\\d^{2n_{el}-1}\\ d^{2n_{el}}\\d^{2n_{el}+1}\end{matrix} \right]\\
+
+= \left[ \begin{matrix} c^2&c^3&\dots&c^{2n_{el}-1}& c^{2n_{el}}\end{matrix} \right] (\frac{fAh}{2}
+\left[ \begin{matrix}
+\frac{4}{3}\\
+\frac{2}{3} \\
+\frac{4}{3} \\
+\frac{2}{3}\\
+\vdots\\
+\frac{2}{3}\\
+\frac{4}{3} \\
+\frac{1}{3} 
+\end{matrix} \right] - 
+\frac{2EA}{h} u_0
+\left[ \begin{matrix}
+-\frac{4}{3}\\
+\frac{1}{6}\\
+0\\
+\vdots\\
+0 \\
+\end{matrix} \right] - 
+\frac{2EA}{h} u_g
+\left[ \begin{matrix}
+0\\
+\vdots\\
+0\\
+\frac{1}{6} \\
+-\frac{3}{4}
+\end{matrix} \right])
+$$
+
+$$
+\underline c^T \underline K \underline d = \underline c^T \underline F\ \\
+ \underline d = \underline K^{-1} \underline F\
+$$
+
+
+
+###  rHigher-order basis function generated by formula for Lagrange polynomials
+
+#### $N_{n_e}-1$-order polynomials
+
+![image-20210129214411227](https://tva1.sinaimg.cn/large/008eGmZEly1gn4wf8pk5aj318u06an13.jpg)
+$$
+N^A(\xi)=\frac{\Pi_{B=1,\neq A}^{N_{n_e}}(\xi-\xi^B)}{\Pi_{B=1,\neq A}^{N_{n_e}}(\xi^A-\xi^B)}
+$$
+
+## 4.07-4.10. The matrix-vector equations for quadratic basis functions
 
