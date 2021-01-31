@@ -1303,3 +1303,28 @@ A gaussian quadrature rule with $n_{int}$ points exactly integrates polynomials 
 
 ![image-20210130213206339](https://tva1.sinaimg.cn/large/008eGmZEly1gn61ovo7lij30xu0dial0.jpg)
 
+$$
+(EAu_{,x})_{,x}+fA=0, f=\bar fx
+$$
+其中E，A, $\bar f$是常数
+$$
+\Rightarrow \frac{d^2u}{dx^2}+\frac{\bar f}{E}x=0 \\
+
+\Rightarrow \frac{d^2u}{dx^2}=-\frac{\bar f}{E}x \\
+
+\Rightarrow \frac{du}{dx} = -\frac{\bar f}{2E}x^2 + C\\
+
+\Rightarrow u(x) = -\frac{\bar f}{6E}x^3 + Cx+D\\
+$$
+D-D problem:
+$$
+u(0)=g_1, u(L)=g_2 \\
+
+\Rightarrow u(x) = -\frac{\bar f}{6E}x^3+(\frac{g_2-g_1}{L}+\frac{\bar f}{6E}L^2)x+g_1
+$$
+D-N problem:
+$$
+u(0)=g_1, EA\frac{du}{dx}|_{x=L}=h \ (or \ \frac{du}{dx}|_{x=L}=\frac{h}{EA})\\
+
+\Rightarrow u(x) = -\frac{\bar f}{6E}x^3+(\frac{h}{EA}+\frac{\bar f}{2E}L^2)x+g_1
+$$
