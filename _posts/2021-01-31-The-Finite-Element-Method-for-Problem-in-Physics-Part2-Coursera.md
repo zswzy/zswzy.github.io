@@ -1,7 +1,7 @@
 ---
 
 layout:     post
-title:      有限元分析基础课程-Coursera
+title:      有限元分析基础课程Part2-Coursera
 subtitle:   
 date:       2021-01-31
 author:     Zeyuan
