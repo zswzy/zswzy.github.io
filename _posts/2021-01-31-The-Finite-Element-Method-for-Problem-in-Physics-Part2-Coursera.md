@@ -113,5 +113,141 @@ $$
 
 Note: the exact solution also satisfy the finite dimensional weak form. The FEM can recover the exact solution. Not the case for other numerical methods.
 
+## 5.04. The best approximation property
+
+Notation:
+
+	- $u^h \isin \mathcal S^h$ the FE solution
+	- $w^h \isin \mathcal V^h$ a weighting function
+	- $U^h \isin \mathcal S^h=\{U^h \isin H^1(\Omega)|U^h(0)=u_0\}$
+
+Note $U^h = u^h+w^h$
+
+### Theorem (Best approximation property)
+
+$$
+a(e,e) \leq a(U^h-u,U^h-u)
+$$
+
+> the energy norm of error is the lowest w.r.t the energy norm of error of ANY member in $S^h$ 
+
+Proof:
+
+Consider $a(e+w^h,e+w^h)=a(e,e)+a(w^h,w^h)+2a(e,w^h)$ .
+
+And the $a(e,w^h)$ is 0 according to the consistency property.
+
+So, $a(e+w^h,e+w^h)=a(e,e)+a(w^h,w^h) \geq a(e,e)$
+
+And $a(e+w^h,e+w^h)=a(u^h-u+w^h,u^h-u+w^h)=a(U^h-u,U^h-u)$
+
+Finally, $a(e,e) \leq a(U^h-u,U^h-u) $
+
+## 5.05. The "Pythagorean Theorem"
+
+### Corollary 1
+
+if $S^h=V^h$, $a(u,u) = a(u^h,u^h)+a(e,e)$
+
+proof: using consistent condition
+
+### Corollary 2
+
+The FE solution under estimate the energy norm of the problem: $a(u^h,u^h) \leq a(u,u)$
+
+Proof: from corollary 1
+
+In elestistic problem , the energy norm is the strain energy
 
 
+
+> Homogenous D boundary condition: $u^h(0)=0$
+
+## 5.06. Sobolev estimates and convergence of the finite element method
+
+Notation:
+
+$U^h \isin \mathcal S^h=\{U^h \isin H^n(\Omega)|U^h(0)=u_0\}$
+
+> $U^h$ does not necessarily represent the FE solution
+
+Consider $U^h$ such that $U^h(x_A)=u^h(x_A)=d_A$
+
+​	A: global dof, $x_A$ : global numbered node, $d_A$: global numbered tril solution dof
+
+Consider $\tilde U^h$ such that $\tilde U^h(x_A)=u(x_A)$, u is the exact solution
+
+![image-20210205153127010](https://tva1.sinaimg.cn/large/008eGmZEly1gncozjm5e9j315i08stgn.jpg)
+
+### Interpolation error estimate in Sobolev space
+
+$$
+||\tilde U^h-u||_m \leq c(h^e)^\alpha ||u||_r
+$$
+
+- $\tilde U^h-u$ : interpolation error 
+- $h^e$ : element size
+- c: constant
+- r: regularity of the solution
+
+> $||u||_r$ measure of regularity (smoothness) of u
+
+- $\alpha$: exponent satisfies $\alpha = min(k+1-m,r-m)$
+  - k: Polynomial order of the finite-dimensional basis
+
+
+
+If r is large(**exact solution is very smooth** ): $\alpha = k+1-m$
+
+​	$||\tilde U^h-u||_m \leq c(h^e)^{k+1-m} ||u||_r$, thus $||\tilde U^h-u||_m \rightarrow 0$ as $h^e \rightarrow 0$ (provided that k+1>m)
+
+This is the convergence property. Provided that the order of the basis function is high. (k+1>m)
+
+## 5.07. Finite element error estimates
+
+Extend the equivelance of H1-energy norm to Hn-energy norm:
+$$
+c_1||v||_n \leq a(v,v)^{1/2} \leq c_2||v||_n
+$$
+
+### Theorem
+
+$$
+||e||_n \leq\bar c (h^e)^\alpha ||u||_r
+$$
+
+Note that $e  =u^h-u$
+
+Proof:
+
+Using  $c_1||e||_n \leq a(e,e)^{1/2}  \leq a(U^h-u,U^h-u)^{1/2}$ (Best approximation property)
+
+Note that $U^h$ is any element in $S^h$, and we can take $\tilde U^h$ as an $U^h$ :
+
+$c_1||e||_n \leq a(e,e)^{1/2}  \leq a(\tilde U^h-u,\tilde U^h-u)^{1/2} \leq c_2 ||\tilde U^h-u||_n$
+
+
+
+And from the interpolation error estimate in Sobolev space (5.6), we have $c_2||\tilde U^h-u||_n \leq c_2c(h^e)^\alpha ||u||_r$
+
+
+
+Finally, we have $||e||_n \leq \frac{c_2c}{c_1}(h^e)^\alpha ||u||_r =\bar c(h^e)^\alpha ||u||_r$  
+
+
+
+For u **sufficiently smooth**,$\alpha = min(k+1-n,r-n)=k+1-n$ , k: polynomial order of basis function
+
+
+
+Consider n=1: $||e||_1 \leq\bar c (h^e)^{\alpha=k} ||u||_r$
+
+- k=1, $||e||_1 \leq\bar c (h^e) ||u||_r$
+- k=2, $||e||_1 \leq\bar c (h^e)^2 ||u||_r$
+
+Consider L2 norm: H0 space $||e||_{L^2} \leq\bar c (h^e)^{k+1} ||u||_r$
+
+- k=1, $||e||_{L^2} \leq\bar c (h^e)^{2} ||u||_r$ , converge quadraticly
+- k=1, $||e||_{L^2} \leq\bar c (h^e)^{3} ||u||_r$
+
+xs
