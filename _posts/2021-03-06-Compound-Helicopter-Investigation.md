@@ -3,7 +3,7 @@
 layout:     post
 title:      复合式共轴高速直升机飞行控制策略研究
 subtitle:   
-date:       2021-03-6
+date:       2021-03-06
 author:     Zeyuan
 header-img: img/https___blogs-images.forbes.com_lorenthompson_files_2017_09_Raider-1200x801.jpg
 catalog: true
